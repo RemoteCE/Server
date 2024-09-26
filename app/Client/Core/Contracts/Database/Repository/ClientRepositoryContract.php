@@ -1,17 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Client\Application\Contracts\Repository;
+namespace App\Client\Core\Contracts\Database\Repository;
 
 use App\Client\Core\Domain\Entity\Client\Client;
 use App\Client\Core\Domain\Entity\Client\ClientNotFoundException;
-use App\Client\Infrastructure\Database\Models\Client as ClientModel;
+use App\Client\Infrastructure\Service\StatsService\StatsServiceException;
 
 interface ClientRepositoryContract
 {
     /**
      * @param Client $client
      * @return void
+     * @throws StatsServiceException
      */
     public function create(Client $client): void;
 

@@ -3,11 +3,10 @@ declare(strict_types=1);
 
 namespace App\Client\Application\API\CreateClientAPI;
 
-use App\Client\Application\Contracts\UseCases\CreateClientCaseContract;
 use App\Client\Application\RequestDTOFactory\CreateClientRequestDTOFactory\CreateClientRequestDTOFactoryContract;
-use App\Client\Application\RequestDTOValidation\CreateClientRequestDTOValidation\CreateClientRequestDTOValidationException;
+use App\Client\Core\UseCases\CreateClientCase\CreateClientCaseContract;
+use Exception;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Http\JsonResponse;
 
 final readonly class CreateClientAPI implements CreateClientAPIContract
 {
@@ -23,7 +22,7 @@ final readonly class CreateClientAPI implements CreateClientAPIContract
                 $this->createClientRequestDTOFactory->create($uuid)
             );
         }
-        catch (CreateClientRequestDTOValidationException $e){
+        catch (Exception $e){
             throw new HttpResponseException(response()->json()->setJson($e->getMessage()));
         }
 

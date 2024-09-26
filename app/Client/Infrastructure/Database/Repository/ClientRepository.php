@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace App\Client\Infrastructure\Database\Repository;
 
-use App\Client\Application\Contracts\Repository\ClientRepositoryContract;
+use App\Client\Core\Contracts\Database\Repository\ClientRepositoryContract;
 use App\Client\Core\Domain\Entity\Client\Client;
 use App\Client\Core\Domain\Entity\Client\ClientNotFoundException;
+use App\Client\Core\Domain\Entity\Client\Events\ClientCreatedEvent;
 use App\Client\Infrastructure\Database\Models\Client as ClientModel;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 readonly final class ClientRepository implements ClientRepositoryContract
@@ -49,7 +49,7 @@ readonly final class ClientRepository implements ClientRepositoryContract
      */
     private function getModelById(int $id): ClientModel
     {
-        return $this->getModel('id', $id);
+        return $this->getModel('id', (string)$id);
     }
 
     public function create(Client $client): void
@@ -57,6 +57,8 @@ readonly final class ClientRepository implements ClientRepositoryContract
         $newClient = new ClientModel();
         $newClient->uuid = $client->getUuid();
         $newClient->save();
+
+        event(new ClientCreatedEvent(Client::fromArray($newClient->toArray())));
     }
 
     public function deleteByUUID(string $uuid): void

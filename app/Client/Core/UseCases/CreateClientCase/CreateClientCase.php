@@ -1,11 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Client\Core\UseCases;
+namespace App\Client\Core\UseCases\CreateClientCase;
 
-use App\Client\Application\Contracts\Repository\ClientRepositoryContract;
-use App\Client\Application\Contracts\UseCases\CreateClientCaseContract;
 use App\Client\Application\RequestDTO\CreateClientRequestDTO;
+use App\Client\Core\Contracts\Database\Repository\ClientRepositoryContract;
 use App\Client\Core\Domain\Entity\Client\Client;
 
 readonly final class CreateClientCase implements CreateClientCaseContract
