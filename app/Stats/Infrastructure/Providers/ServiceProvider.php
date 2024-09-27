@@ -12,7 +12,7 @@ use App\Stats\Application\RequestDTOValidation\CreateStatsRequestDTOValidation\C
 use App\Stats\Core\Contracts\Database\Repository\StatsRepositoryContract;
 use App\Stats\Core\UseCases\API\CreateStatsAPICase\CreateStatsAPICase;
 use App\Stats\Core\UseCases\API\CreateStatsAPICase\CreateStatsAPICaseContract;
-use App\Stats\Infrastructure\Database\Repository\StatsRepository;
+use App\Stats\Infrastructure\Database\Repository\StatsRepository\StatsRepository;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
