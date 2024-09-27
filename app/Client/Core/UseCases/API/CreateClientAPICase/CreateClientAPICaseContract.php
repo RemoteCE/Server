@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Client\Core\UseCases\CreateClientCase;
+namespace App\Client\Core\UseCases\API\CreateClientAPICase;
 
 use App\Client\Application\RequestDTO\CreateClientRequestDTO;
 use App\Client\Infrastructure\Service\StatsService\StatsServiceException;
 
-interface CreateClientCaseContract
+interface CreateClientAPICaseContract
 {
     /**
      * @param CreateClientRequestDTO $clientRequestDTO

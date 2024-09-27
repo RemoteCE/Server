@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Client\Core\UseCases\CreateStatsCase;
+namespace App\Client\Core\UseCases\Domain\CreateStatsDomainCase;
 
 use App\Client\Core\Contracts\Service\StatsServiceContract;
 use App\Client\Core\Domain\Entity\Client\Client;
 
-final readonly class CreateStatsCase implements CreateStatsCaseContract
+final readonly class CreateStatsDomainCase implements CreateStatsDomainCaseContract
 {
     public function __construct(private StatsServiceContract $statsService)
     {
