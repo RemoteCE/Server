@@ -14,7 +14,7 @@ final readonly class CreateCommandAPICase implements CreateCommandAPICaseContrac
 
     }
 
-    public function createCommand(CreateCommandRequestDTO $createCommandRequestDTO): void
+    public function create(CreateCommandRequestDTO $createCommandRequestDTO): void
     {
         $this->commandRepository->create(Command::fromArray($createCommandRequestDTO->toArray()));
     }

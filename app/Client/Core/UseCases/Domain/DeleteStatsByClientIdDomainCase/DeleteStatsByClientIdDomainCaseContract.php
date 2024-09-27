@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Client\Core\UseCases\Domain\DeleteClientByIdDomainCase;
+namespace App\Client\Core\UseCases\Domain\DeleteStatsByClientIdDomainCase;
 
 use App\Client\Core\Domain\Entity\Client\Client;
 
-interface DeleteClientByIdDomainCaseContract
+interface DeleteStatsByClientIdDomainCaseContract
 {
     /**
      * @param Client $client

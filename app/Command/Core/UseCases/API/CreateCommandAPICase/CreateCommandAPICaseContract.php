@@ -7,5 +7,9 @@ use App\Command\Application\RequestDTO\CreateCommandRequestDTO;
 
 interface CreateCommandAPICaseContract
 {
-    public function createCommand(CreateCommandRequestDTO $createCommandRequestDTO): void;
+    /**
+     * @param CreateCommandRequestDTO $createCommandRequestDTO
+     * @return void
+     */
+    public function create(CreateCommandRequestDTO $createCommandRequestDTO): void;
 }
