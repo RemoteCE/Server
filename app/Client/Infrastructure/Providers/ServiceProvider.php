@@ -10,14 +10,22 @@ use App\Client\Application\RequestDTOFactory\CreateClientRequestDTOFactory\Creat
 use App\Client\Application\RequestDTOValidation\CreateClientRequestDTOValidation\CreateClientRequestDTOValidation;
 use App\Client\Application\RequestDTOValidation\CreateClientRequestDTOValidation\CreateClientRequestDTOValidationContract;
 use App\Client\Core\Contracts\Database\Repository\ClientRepositoryContract;
+use App\Client\Core\Contracts\Service\CommandServiceContract;
 use App\Client\Core\Contracts\Service\StatsServiceContract;
 use App\Client\Core\UseCases\API\CreateClientAPICase\CreateClientAPICase;
 use App\Client\Core\UseCases\API\CreateClientAPICase\CreateClientAPICaseContract;
+use App\Client\Core\UseCases\Domain\CreateCommandDomainCase\CreateCommandDomainCase;
+use App\Client\Core\UseCases\Domain\CreateCommandDomainCase\CreateCommandDomainCaseContract;
 use App\Client\Core\UseCases\Domain\CreateStatsDomainCase\CreateStatsDomainCase;
 use App\Client\Core\UseCases\Domain\CreateStatsDomainCase\CreateStatsDomainCaseContract;
 use App\Client\Core\UseCases\Domain\DeleteClientByIdDomainCase\DeleteClientByIdDomainCase;
 use App\Client\Core\UseCases\Domain\DeleteClientByIdDomainCase\DeleteClientByIdDomainCaseContract;
+use App\Client\Core\UseCases\Domain\DeleteCommandByClientIdDomainCase\DeleteCommandByClientIdDomainCase;
+use App\Client\Core\UseCases\Domain\DeleteCommandByClientIdDomainCase\DeleteCommandByClientIdDomainCaseContract;
+use App\Client\Core\UseCases\Domain\DeleteStatsByClientIdDomainCase\DeleteStatsByClientIdDomainCase;
+use App\Client\Core\UseCases\Domain\DeleteStatsByClientIdDomainCase\DeleteStatsByClientIdDomainCaseContract;
 use App\Client\Infrastructure\Database\Repository\ClientRepository\ClientRepository;
+use App\Client\Infrastructure\Service\CommandService\CommandService;
 use App\Client\Infrastructure\Service\StatsService\StatsService;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
@@ -39,13 +47,18 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->app->bind(CreateClientAPICaseContract::class, CreateClientAPICase::class);
 
         //DomainUseCase
+        $this->app->bind(CreateCommandDomainCaseContract::class, CreateCommandDomainCase::class);
         $this->app->bind(CreateStatsDomainCaseContract::class, CreateStatsDomainCase::class);
         $this->app->bind(DeleteClientByIdDomainCaseContract::class, DeleteClientByIdDomainCase::class);
-        
+        $this->app->bind(DeleteStatsByClientIdDomainCaseContract::class, DeleteStatsByClientIdDomainCase::class);
+        $this->app->bind(DeleteCommandByClientIdDomainCaseContract::class, DeleteCommandByClientIdDomainCase::class);
+
         //Repository
         $this->app->bind(ClientRepositoryContract::class, ClientRepository::class);
 
         //Service
         $this->app->bind(StatsServiceContract::class, StatsService::class);
+        $this->app->bind(CommandServiceContract::class, CommandService::class);
+
     }
 }

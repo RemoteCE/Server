@@ -21,7 +21,7 @@ final readonly class CreateCommandAPI implements CreateCommandAPIContract
     public function create(int $clientId): void
     {
         try {
-            $this->createCommandAPICase->createCommand(
+            $this->createCommandAPICase->create(
                 $this->createCommandRequestDTOFactory->create($clientId)
             );
         } catch (Exception $e){

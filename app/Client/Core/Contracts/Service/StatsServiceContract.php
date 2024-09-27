@@ -14,4 +14,11 @@ interface StatsServiceContract
      * @throws StatsServiceException
      */
     public function createStats(Client $client): void;
+
+    /**
+     * @param int $clientId
+     * @return void
+     */
+    public function deleteStatsByClientId(int $clientId): void;
+
 }
