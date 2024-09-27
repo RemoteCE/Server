@@ -34,7 +34,7 @@ final class Stats implements EntityContract
     {
         return [
             'id' => $this->id,
-            'userId' => $this->clientId,
+            'clientId' => $this->clientId,
             'lastActive' => $this->lastActive,
         ];
     }
