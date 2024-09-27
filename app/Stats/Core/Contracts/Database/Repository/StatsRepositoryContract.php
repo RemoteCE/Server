@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Stats\Application\Contracts\Repository;
+namespace App\Stats\Core\Contracts\Database\Repository;
 
 use App\Stats\Core\Domain\Entity\Stats\Stats;
 

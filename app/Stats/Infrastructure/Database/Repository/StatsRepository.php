@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Stats\Infrastructure\Database\Repository;
 
-use App\Stats\Application\Contracts\Repository\StatsRepositoryContract;
+use App\Stats\Core\Contracts\Database\Repository\StatsRepositoryContract;
 use App\Stats\Core\Domain\Entity\Stats\Stats;
 use App\Stats\Infrastructure\Database\Models\Stats as StatsModel;
 

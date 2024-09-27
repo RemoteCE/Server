@@ -3,15 +3,14 @@ declare(strict_types=1);
 
 namespace App\Stats\Application\API\CreateStatsAPI;
 
-use App\Stats\Application\Contracts\UseCases\CreateStatsCaseContract;
 use App\Stats\Application\RequestDTOFactory\CreateStatsRequestDTOFactory\CreateStatsRequestDTOFactoryContract;
 use App\Stats\Application\RequestDTOValidation\CreateStatsRequestDTOValidation\CreateStatsRequestDTOValidationException;
+use App\Stats\Core\UseCases\API\CreateStatsAPICase\CreateStatsAPICaseContract;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Http\JsonResponse;
 
 final readonly class CreateStatsAPI implements CreateStatsAPIContract
 {
-    public function __construct(private CreateStatsCaseContract $createStatsCase, private CreateStatsRequestDTOFactoryContract $createStatsRequestDTOFactory)
+    public function __construct(private CreateStatsAPICaseContract $createStatsCase, private CreateStatsRequestDTOFactoryContract $createStatsRequestDTOFactory)
     {
     }
 
