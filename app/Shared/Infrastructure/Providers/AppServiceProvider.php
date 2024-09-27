@@ -13,5 +13,8 @@ class AppServiceProvider extends ServiceProvider
 
         // Stats
         $this->app->register(\App\Stats\Infrastructure\Providers\ServiceProvider::class);
+
+        // Commands
+        $this->app->register(\App\Command\Infrastructure\Providers\ServiceProvider::class);
     }
 }
