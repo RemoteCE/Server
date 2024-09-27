@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Stats extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'client_id',
+        'last_active'
+    ];
 }

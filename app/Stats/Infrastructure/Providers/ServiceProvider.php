@@ -5,14 +5,14 @@ namespace App\Stats\Infrastructure\Providers;
 
 use App\Stats\Application\API\CreateStatsAPI\CreateStatsAPI;
 use App\Stats\Application\API\CreateStatsAPI\CreateStatsAPIContract;
-use App\Stats\Application\Contracts\Repository\StatsRepositoryContract;
-use App\Stats\Application\Contracts\UseCases\CreateStatsCaseContract;
 use App\Stats\Application\RequestDTOFactory\CreateStatsRequestDTOFactory\CreateStatsRequestDTOFactory;
 use App\Stats\Application\RequestDTOFactory\CreateStatsRequestDTOFactory\CreateStatsRequestDTOFactoryContract;
 use App\Stats\Application\RequestDTOValidation\CreateStatsRequestDTOValidation\CreateStatsRequestDTOValidation;
 use App\Stats\Application\RequestDTOValidation\CreateStatsRequestDTOValidation\CreateStatsRequestDTOValidationContract;
-use App\Stats\Core\UseCases\CreateStatsCase;
-use App\Stats\Infrastructure\Database\Repository\StatsRepository;
+use App\Stats\Core\Contracts\Database\Repository\StatsRepositoryContract;
+use App\Stats\Core\UseCases\API\CreateStatsAPICase\CreateStatsAPICase;
+use App\Stats\Core\UseCases\API\CreateStatsAPICase\CreateStatsAPICaseContract;
+use App\Stats\Infrastructure\Database\Repository\StatsRepository\StatsRepository;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
@@ -28,7 +28,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->app->bind(CreateStatsRequestDTOValidationContract::class, CreateStatsRequestDTOValidation::class);
 
         //UseCase
-        $this->app->bind(CreateStatsCaseContract::class, CreateStatsCase::class);
+        $this->app->bind(CreateStatsAPICaseContract::class, CreateStatsAPICase::class);
 
         //Repository
         $this->app->bind(StatsRepositoryContract::class, StatsRepository::class);
