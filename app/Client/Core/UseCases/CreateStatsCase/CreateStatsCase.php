@@ -6,7 +6,7 @@ namespace App\Client\Core\UseCases\CreateStatsCase;
 use App\Client\Core\Contracts\Service\StatsServiceContract;
 use App\Client\Core\Domain\Entity\Client\Client;
 
-class CreateStatsCase implements CreateStatsCaseContract
+final readonly class CreateStatsCase implements CreateStatsCaseContract
 {
     public function __construct(private StatsServiceContract $statsService)
     {

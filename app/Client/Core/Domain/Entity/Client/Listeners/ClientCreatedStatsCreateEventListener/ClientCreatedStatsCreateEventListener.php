@@ -6,7 +6,7 @@ use App\Client\Core\Domain\Entity\Client\Events\ClientCreatedEvent;
 use App\Client\Core\UseCases\CreateStatsCase\CreateStatsCaseContract;
 use App\Client\Infrastructure\Service\StatsService\StatsServiceException;
 
-class ClientCreatedStatsCreateEventListener
+final readonly class ClientCreatedStatsCreateEventListener
 {
     public function __construct(private CreateStatsCaseContract $createStatsCase)
     {
