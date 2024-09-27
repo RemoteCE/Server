@@ -11,11 +11,13 @@ use App\Client\Application\RequestDTOValidation\CreateClientRequestDTOValidation
 use App\Client\Application\RequestDTOValidation\CreateClientRequestDTOValidation\CreateClientRequestDTOValidationContract;
 use App\Client\Core\Contracts\Database\Repository\ClientRepositoryContract;
 use App\Client\Core\Contracts\Service\StatsServiceContract;
-use App\Client\Core\UseCases\CreateClientCase\CreateClientCase;
-use App\Client\Core\UseCases\CreateClientCase\CreateClientCaseContract;
-use App\Client\Core\UseCases\CreateStatsCase\CreateStatsCase;
-use App\Client\Core\UseCases\CreateStatsCase\CreateStatsCaseContract;
-use App\Client\Infrastructure\Database\Repository\ClientRepository;
+use App\Client\Core\UseCases\API\CreateClientAPICase\CreateClientAPICase;
+use App\Client\Core\UseCases\API\CreateClientAPICase\CreateClientAPICaseContract;
+use App\Client\Core\UseCases\Domain\CreateStatsDomainCase\CreateStatsDomainCase;
+use App\Client\Core\UseCases\Domain\CreateStatsDomainCase\CreateStatsDomainCaseContract;
+use App\Client\Core\UseCases\Domain\DeleteClientByIdDomainCase\DeleteClientByIdDomainCase;
+use App\Client\Core\UseCases\Domain\DeleteClientByIdDomainCase\DeleteClientByIdDomainCaseContract;
+use App\Client\Infrastructure\Database\Repository\ClientRepository\ClientRepository;
 use App\Client\Infrastructure\Service\StatsService\StatsService;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
@@ -33,10 +35,13 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         //RequestDTOValidation
         $this->app->bind(CreateClientRequestDTOValidationContract::class, CreateClientRequestDTOValidation::class);
 
-        //UseCase
-        $this->app->bind(CreateClientCaseContract::class, CreateClientCase::class);
-        $this->app->bind(CreateStatsCaseContract::class, CreateStatsCase::class);
+        //APIUseCase
+        $this->app->bind(CreateClientAPICaseContract::class, CreateClientAPICase::class);
 
+        //DomainUseCase
+        $this->app->bind(CreateStatsDomainCaseContract::class, CreateStatsDomainCase::class);
+        $this->app->bind(DeleteClientByIdDomainCaseContract::class, DeleteClientByIdDomainCase::class);
+        
         //Repository
         $this->app->bind(ClientRepositoryContract::class, ClientRepository::class);
 

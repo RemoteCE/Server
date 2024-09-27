@@ -7,7 +7,7 @@ use App\Client\Core\Contracts\Service\StatsServiceContract;
 use App\Client\Core\Domain\Entity\Client\Client;
 use App\Stats\Application\API\CreateStatsAPI\CreateStatsAPIContract;
 
-class StatsService implements StatsServiceContract
+final readonly class StatsService implements StatsServiceContract
 {
     public function __construct(private CreateStatsAPIContract $createStatsAPI)
     {

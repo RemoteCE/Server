@@ -3,12 +3,16 @@
 namespace App\Client\Core\Domain\Entity\Client\Listeners\ClientCreatedStatsCreateEventListener;
 
 use App\Client\Core\Domain\Entity\Client\Events\ClientCreatedEvent;
-use App\Client\Core\UseCases\CreateStatsCase\CreateStatsCaseContract;
+use App\Client\Core\UseCases\Domain\CreateStatsDomainCase\CreateStatsDomainCaseContract;
+use App\Client\Infrastructure\Database\Repository\ClientRepository\DeleteClientById\DeleteClientById;
 use App\Client\Infrastructure\Service\StatsService\StatsServiceException;
 
 final readonly class ClientCreatedStatsCreateEventListener
 {
-    public function __construct(private CreateStatsCaseContract $createStatsCase)
+    public function __construct(
+        private CreateStatsDomainCaseContract $createStatsDomainCase,
+        private DeleteClientById $deleteClientById
+    )
     {
     }
 
@@ -16,10 +20,13 @@ final readonly class ClientCreatedStatsCreateEventListener
     /**
      * @param ClientCreatedEvent $event
      * @return void
-     * @throws StatsServiceException
      */
     public function handle(ClientCreatedEvent $event): void
     {
-        $this->createStatsCase->create($event->client);
+        try{
+            $this->createStatsDomainCase->create($event->client);
+        } catch (StatsServiceException) {
+            $this->deleteClientById->deleteClient($event->client->getId());
+        }
     }
 }
