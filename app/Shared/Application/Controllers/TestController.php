@@ -3,15 +3,14 @@ declare(strict_types=1);
 
 namespace App\Shared\Application\Controllers;
 
-use App\Client\Application\API\CreateClientAPI\CreateClientAPIContract;
-use App\Stats\Application\API\CreateStatsAPI\CreateStatsAPIContract;
-use Illuminate\Support\Facades\Log;
+use App\Client\Presentation\API\CreateClientAPI\CreateClientAPI;
+use App\Client\Presentation\API\GetClientByUUIDAPI\GetClientByUUIDAPI;
 use Illuminate\Support\Str;
 
 class TestController
 {
-    public function test(CreateClientAPIContract $api): void
+    public function test(CreateClientAPI $api)
     {
-        $api->create(Str::uuid()->toString());
+        return $api->create(Str::uuid()->toString());
     }
 }

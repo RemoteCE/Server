@@ -27,7 +27,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function register(): void
     {
-        //API
+        //External
         $this->app->bind(CreateStatsAPIContract::class, CreateStatsAPI::class);
         $this->app->bind(DeleteStatsByClientIdAPIContract::class, DeleteStatsByClientIdAPI::class);
 

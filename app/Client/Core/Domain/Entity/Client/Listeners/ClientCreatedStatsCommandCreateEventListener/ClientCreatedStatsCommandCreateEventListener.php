@@ -8,7 +8,7 @@ use App\Client\Core\UseCases\Domain\CreateStatsDomainCase\CreateStatsDomainCaseC
 use App\Client\Core\UseCases\Domain\DeleteClientByIdDomainCase\DeleteClientByIdDomainCaseContract;
 use App\Client\Core\UseCases\Domain\DeleteCommandByClientIdDomainCase\DeleteCommandByClientIdDomainCaseContract;
 use App\Client\Core\UseCases\Domain\DeleteStatsByClientIdDomainCase\DeleteStatsByClientIdDomainCaseContract;
-use App\Client\Infrastructure\Service\ServiceException;
+use App\Client\Infrastructure\External\ExternalException;
 
 final readonly class ClientCreatedStatsCommandCreateEventListener
 {
@@ -32,7 +32,7 @@ final readonly class ClientCreatedStatsCommandCreateEventListener
         try{
             $this->createStatsDomainCase->create($event->client);
             $this->createCommandDomainCase->create($event->client);
-        } catch (ServiceException) {
+        } catch (ExternalException) {
             $this->deleteClientByIdDomainCase->delete($event->client);
             $this->deleteStatsByClientIdDomainCase->delete($event->client);
             $this->deleteCommandByClientIdDomainCase->delete($event->client);
