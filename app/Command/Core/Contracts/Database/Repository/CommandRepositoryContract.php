@@ -18,4 +18,11 @@ interface CommandRepositoryContract
      * @return void
      */
     public function deleteByClientId(int $clientId): void;
+
+    /**
+     * @param int $clientId
+     * @param Command $command
+     * @return void
+     */
+    public function updateByClientId(int $clientId, Command $command): void;
 }
