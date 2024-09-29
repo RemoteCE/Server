@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Client\Application\RequestDTOValidation\GetClientByUUIDAPIRequestDTOValidation;
+namespace App\Client\Application\RequestDTOValidation\GetClientByUUIDRequestDTOValidation;
 
 use App\Client\Application\RequestDTO\GetClientByUUIDRequestDTO;
 use Illuminate\Support\Facades\Validator;
 
-final readonly class GetClientByUUIDAPIRequestDTOValidation implements GetClientByUUIDAPIRequestDTOValidationContract
+final readonly class GetClientByUUIDRequestDTOValidation implements GetClientByUUIDRequestDTOValidationContract
 {
     public function validate(GetClientByUUIDRequestDTO $getClientByUUIDRequestDTO): void
     {
@@ -15,7 +15,7 @@ final readonly class GetClientByUUIDAPIRequestDTOValidation implements GetClient
         ]);
 
         if($validation->fails()) {
-            throw new GetClientByUUIDAPIRequestDTOValidationException($validation->messages()->toJson());
+            throw new GetClientByUUIDRequestDTOValidationException($validation->messages()->toJson());
         }
     }
 }

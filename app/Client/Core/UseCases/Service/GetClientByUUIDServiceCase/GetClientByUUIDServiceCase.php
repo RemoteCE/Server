@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Client\Core\UseCases\API\GetClientByUUIDAPICase;
+namespace App\Client\Core\UseCases\Service\GetClientByUUIDServiceCase;
 
 use App\Client\Core\Contracts\Database\Repository\ClientRepositoryContract;
 use App\Client\Core\Domain\Entity\Client\ValueObject\ClientValueObject;
 use App\Client\Core\Domain\Entity\Client\ValueObject\UUIDValueObject;
 use App\Client\Infrastructure\Database\Repository\ClientRepository\ClientRepositoryException;
 
-final readonly class GetClientByUUIDAPICase implements GetClientByUUIDAPICaseContract
+final readonly class GetClientByUUIDServiceCase implements GetClientByUUIDServiceCaseContract
 {
     public function __construct(private ClientRepositoryContract $clientRepository)
     {
@@ -23,7 +23,7 @@ final readonly class GetClientByUUIDAPICase implements GetClientByUUIDAPICaseCon
                 $Client->getUuid()
             );
         } catch (ClientRepositoryException $exception) {
-            throw new GetClientByUUIDAPICaseException($exception->getMessage());
+            throw new GetClientByUUIDServiceCaseException($exception->getMessage());
         }
     }
 }

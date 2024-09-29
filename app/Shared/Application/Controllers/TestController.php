@@ -3,16 +3,13 @@ declare(strict_types=1);
 
 namespace App\Shared\Application\Controllers;
 
-use App\Client\Application\API\CreateClientAPI\CreateClientAPIContract;
-use App\Command\Application\API\UpdateCommandByClientIdAPI\UpdateCommandByClientIdAPIContract;
-use App\Stats\Application\API\CreateStatsAPI\CreateStatsAPIContract;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
+use App\Client\Application\API\CreateClientAPI\CreateClientServiceContract;
+use App\Client\Presentation\API\GetClientByUUIDAPI\GetClientByUUIDAPI;
 
 class TestController
 {
-    public function test(UpdateCommandByClientIdAPIContract $api): void
+    public function test(GetClientByUUIDAPI $api): \Symfony\Component\HttpFoundation\Response
     {
-        $api->update(2, 'testCommand', null);
+        return $api->get('86787592-5a26-4c32-98fc-deae2e0b2afd');
     }
 }
