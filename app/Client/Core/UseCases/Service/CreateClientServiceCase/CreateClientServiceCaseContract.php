@@ -5,7 +5,7 @@ namespace App\Client\Core\UseCases\Service\CreateClientServiceCase;
 
 use App\Client\Application\RequestDTO\CreateClientRequestDTO;
 use App\Client\Core\Domain\Entity\Client\ValueObject\UUIDValueObject;
-use App\Client\Infrastructure\Service\StatsService\StatsServiceException;
+use App\Client\Infrastructure\External\StatsExternal\StatsExternalException;
 
 interface CreateClientServiceCaseContract
 {

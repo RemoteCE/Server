@@ -20,8 +20,8 @@ use App\Client\Application\Service\CreateClientService\CreateClientServiceContra
 use App\Client\Application\Service\GetClientByUUIDService\GetClientByUUIDService;
 use App\Client\Application\Service\GetClientByUUIDService\GetClientByUUIDServiceContract;
 use App\Client\Core\Contracts\Database\Repository\ClientRepositoryContract;
-use App\Client\Core\Contracts\Service\CommandServiceContract;
-use App\Client\Core\Contracts\Service\StatsServiceContract;
+use App\Client\Core\Contracts\External\CommandExternalContract;
+use App\Client\Core\Contracts\External\StatsExternalContract;
 use App\Client\Core\UseCases\Service\CreateClientServiceCase\CreateClientServiceCase;
 use App\Client\Core\UseCases\Service\CreateClientServiceCase\CreateClientServiceCaseContract;
 use App\Client\Core\UseCases\Domain\CreateCommandDomainCase\CreateCommandDomainCase;
@@ -37,16 +37,16 @@ use App\Client\Core\UseCases\Domain\DeleteStatsByClientIdDomainCase\DeleteStatsB
 use App\Client\Core\UseCases\Service\GetClientByUUIDServiceCase\GetClientByUUIDServiceCase;
 use App\Client\Core\UseCases\Service\GetClientByUUIDServiceCase\GetClientByUUIDServiceCaseContract;
 use App\Client\Infrastructure\Database\Repository\ClientRepository\ClientRepository;
-use App\Client\Infrastructure\Service\CommandService\CommandService;
-use App\Client\Infrastructure\Service\StatsService\StatsService;
+use App\Client\Infrastructure\External\CommandExternal\CommandExternal;
+use App\Client\Infrastructure\External\StatsExternal\StatsExternal;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function register(): void{
-        // Event Service Provider
+        // Event External Provider
         $this->app->register(EventServiceProvider::class);
 
-        // Service
+        // External
         $this->app->bind(CreateClientServiceContract::class, CreateClientService::class);
         $this->app->bind(GetClientByUUIDServiceContract::class, GetClientByUUIDService::class);
 
@@ -76,9 +76,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         // Repository
         $this->app->bind(ClientRepositoryContract::class, ClientRepository::class);
 
-        // External Service
-        $this->app->bind(StatsServiceContract::class, StatsService::class);
-        $this->app->bind(CommandServiceContract::class, CommandService::class);
+        // External External
+        $this->app->bind(StatsExternalContract::class, StatsExternal::class);
+        $this->app->bind(CommandExternalContract::class, CommandExternal::class);
 
     }
 }

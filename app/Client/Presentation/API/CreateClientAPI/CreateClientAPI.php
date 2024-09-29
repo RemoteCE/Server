@@ -26,6 +26,6 @@ final readonly class CreateClientAPI
             return response()->json()->setJson($exception->getMessage());
         }
 
-        return response();
+        return response(null);
     }
 }

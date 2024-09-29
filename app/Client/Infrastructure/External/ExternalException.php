@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Client\Infrastructure\Service;
+namespace App\Client\Infrastructure\External;
 
-class ServiceException extends \Exception
+class ExternalException extends \Exception
 {
     public function __construct(string $message)
     {

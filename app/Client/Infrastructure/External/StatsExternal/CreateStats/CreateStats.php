@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Client\Infrastructure\Service\StatsService\CreateStats;
+namespace App\Client\Infrastructure\External\StatsExternal\CreateStats;
 
 use App\Client\Core\Domain\Entity\Client\Client;
-use App\Client\Infrastructure\Service\StatsService\StatsServiceException;
+use App\Client\Infrastructure\External\StatsExternal\StatsExternalException;
 use App\Stats\Application\API\CreateStatsAPI\CreateStatsAPIContract;
 
 final readonly class CreateStats
@@ -17,7 +17,7 @@ final readonly class CreateStats
     /**
      * @param Client $client
      * @return void
-     * @throws StatsServiceException
+     * @throws StatsExternalException
      */
     public function createStats(Client $client): void
     {
@@ -25,7 +25,7 @@ final readonly class CreateStats
             $this->createStatsAPI->create($client->getId());
         }
         catch (\Exception $e) {
-            throw new StatsServiceException($e->getMessage());
+            throw new StatsExternalException($e->getMessage());
         }
     }
 }

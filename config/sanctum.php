@@ -9,9 +9,9 @@ return [
     | Stateful Domains
     |--------------------------------------------------------------------------
     |
-    | Requests from the following domains / hosts will receive stateful Service
+    | Requests from the following domains / hosts will receive stateful External
     | authentication cookies. Typically, these should include your local
-    | and production domains which access your Service via a frontend SPA.
+    | and production domains which access your External via a frontend SPA.
     |
     */
 

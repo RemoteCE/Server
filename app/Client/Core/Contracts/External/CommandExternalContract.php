@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Client\Core\Contracts\Service;
+namespace App\Client\Core\Contracts\External;
 
 use App\Client\Core\Domain\Entity\Client\Client;
-use App\Client\Infrastructure\Service\CommandService\CommandServiceException;
-use App\Client\Infrastructure\Service\CommandService\CreateCommand\CommandServiceCreateCommandException;
+use App\Client\Infrastructure\External\CommandExternal\CommandExternalException;
+use App\Client\Infrastructure\External\CommandExternal\CreateCommand\CommandExternalCreateCommandException;
 
-interface CommandServiceContract
+interface CommandExternalContract
 {
     /**
      * @param Client $client
      * @return void
-     * @throws CommandServiceCreateCommandException
+     * @throws CommandExternalCreateCommandException
      */
     public function createCommand(Client $client): void;
 

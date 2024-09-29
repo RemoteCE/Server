@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Client\Infrastructure\Service\CommandService\DeleteCommandByClientId;
+namespace App\Client\Infrastructure\External\CommandExternal\DeleteCommandByClientId;
 
 use App\Command\Application\API\DeleteCommandByClientIdAPI\DeleteCommandByClientIdAPIContract;
 

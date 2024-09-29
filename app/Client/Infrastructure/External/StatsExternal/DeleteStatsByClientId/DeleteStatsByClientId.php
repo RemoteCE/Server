@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Client\Infrastructure\Service\StatsService\DeleteStatsByClientId;
+namespace App\Client\Infrastructure\External\StatsExternal\DeleteStatsByClientId;
 
 use App\Client\Core\Domain\Entity\Client\Client;
-use App\Client\Infrastructure\Service\StatsService\StatsServiceException;
+use App\Client\Infrastructure\External\StatsExternal\StatsExternalException;
 use App\Stats\Application\API\CreateStatsAPI\CreateStatsAPIContract;
 use App\Stats\Application\API\DeleteStatsByClientIdAPI\DeleteStatsByClientIdAPIContract;
 

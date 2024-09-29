@@ -33,7 +33,7 @@ use App\Command\Infrastructure\Database\Repository\CommandRepository\CommandRepo
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function register(): void{
-        // Service
+        // External
         $this->app->bind(CreateCommandAPIContract::class, CreateCommandAPI::class);
         $this->app->bind(DeleteCommandByClientIdAPIContract::class, DeleteCommandByClientIdAPI::class);
         $this->app->bind(UpdateCommandByClientIdAPIContract::class, UpdateCommandByClientIdAPI::class);

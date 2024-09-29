@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Client\Infrastructure\Service\CommandService;
+namespace App\Client\Infrastructure\External\CommandExternal;
 
-use App\Client\Core\Contracts\Service\CommandServiceContract;
+use App\Client\Core\Contracts\External\CommandExternalContract;
 use App\Client\Core\Domain\Entity\Client\Client;
-use App\Client\Infrastructure\Service\CommandService\CreateCommand\CreateCommand;
-use App\Client\Infrastructure\Service\CommandService\DeleteCommandByClientId\DeleteCommandByClientId;
+use App\Client\Infrastructure\External\CommandExternal\CreateCommand\CreateCommand;
+use App\Client\Infrastructure\External\CommandExternal\DeleteCommandByClientId\DeleteCommandByClientId;
 
-final readonly class CommandService implements CommandServiceContract
+final readonly class CommandExternal implements CommandExternalContract
 {
     public function __construct(
         private CreateCommand $createCommand,
