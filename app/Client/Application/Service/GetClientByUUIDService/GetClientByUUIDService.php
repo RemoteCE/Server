@@ -12,7 +12,7 @@ use App\Client\Core\UseCases\UseCaseException;
 final readonly class GetClientByUUIDService implements GetClientByUUIDServiceContract
 {
     public function __construct(
-        private GetClientByUUIDServiceCaseContract $getClientByUUIDAPICase,
+        private GetClientByUUIDServiceCaseContract $getClientByUUIDServiceCase,
         private GetClientByUUIDMapperContract      $getClientByUUIDMapper,
     )
     {
@@ -22,7 +22,7 @@ final readonly class GetClientByUUIDService implements GetClientByUUIDServiceCon
     {
         try {
             return $this->getClientByUUIDMapper->toDTO(
-                $this->getClientByUUIDAPICase->get(
+                $this->getClientByUUIDServiceCase->get(
                     $this->getClientByUUIDMapper->toVO($getClientByUUIDRequestDTO)
                 )
             );

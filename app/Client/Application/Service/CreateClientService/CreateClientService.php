@@ -11,7 +11,7 @@ final readonly class CreateClientService implements CreateClientServiceContract
 {
     public function __construct(
         private CreateClientMapperContract $createClientMapper,
-        private CreateClientServiceCaseContract $createClientAPICase
+        private CreateClientServiceCaseContract $createClientServiceCase
     )
     {
 
@@ -19,7 +19,7 @@ final readonly class CreateClientService implements CreateClientServiceContract
 
     public function create(CreateClientRequestDTO $createClientRequestDTO): void
     {
-        $this->createClientAPICase->create(
+        $this->createClientServiceCase->create(
             $this->createClientMapper->toVO(
                 $createClientRequestDTO
             )

@@ -5,12 +5,12 @@ namespace App\Client\Infrastructure\External\StatsExternal\DeleteStatsByClientId
 
 use App\Client\Core\Domain\Entity\Client\Client;
 use App\Client\Infrastructure\External\StatsExternal\StatsExternalException;
-use App\Stats\Application\API\CreateStatsAPI\CreateStatsAPIContract;
-use App\Stats\Application\API\DeleteStatsByClientIdAPI\DeleteStatsByClientIdAPIContract;
+use App\Stats\Application\Service\CreateStatsService\CreateStatsServiceContract;
+use App\Stats\Application\Service\DeleteStatsByClientIdService\DeleteStatsByClientIdServiceContract;
 
 class DeleteStatsByClientId
 {
-    public function __construct(private DeleteStatsByClientIdAPIContract $deleteStatsByClientIdAPI)
+    public function __construct(private DeleteStatsByClientIdServiceContract $deleteStatsByClientIdAPI)
     {
     }
 

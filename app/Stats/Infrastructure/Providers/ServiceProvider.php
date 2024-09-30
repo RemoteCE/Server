@@ -3,11 +3,10 @@ declare(strict_types=1);
 
 namespace App\Stats\Infrastructure\Providers;
 
-use App\Stats\Application\API\CreateStatsAPI\CreateStatsAPI;
-use App\Stats\Application\API\CreateStatsAPI\CreateStatsAPIContract;
-use App\Stats\Application\API\DeleteStatsByClientIdAPI\DeleteStatsByClientIdAPI;
-use App\Stats\Application\API\DeleteStatsByClientIdAPI\DeleteStatsByClientIdAPIContract;
-use App\Stats\Application\RequestDTO\DeleteStatsByClientIdRequestDTO;
+use App\Stats\Application\Service\CreateStatsService\CreateStatsService;
+use App\Stats\Application\Service\CreateStatsService\CreateStatsServiceContract;
+use App\Stats\Application\Service\DeleteStatsByClientIdService\DeleteStatsByClientIdService;
+use App\Stats\Application\Service\DeleteStatsByClientIdService\DeleteStatsByClientIdServiceContract;
 use App\Stats\Application\RequestDTOFactory\CreateStatsRequestDTOFactory\CreateStatsRequestDTOFactory;
 use App\Stats\Application\RequestDTOFactory\CreateStatsRequestDTOFactory\CreateStatsRequestDTOFactoryContract;
 use App\Stats\Application\RequestDTOFactory\DeleteStatsByClientIdRequestDTOFactory\DeleteStatsByClientIdRequestDTOFactory;
@@ -17,33 +16,33 @@ use App\Stats\Application\RequestDTOValidation\CreateStatsRequestDTOValidation\C
 use App\Stats\Application\RequestDTOValidation\DeleteStatsByClientIdRequestDTOValidation\DeleteStatsByClientIdRequestDTOValidation;
 use App\Stats\Application\RequestDTOValidation\DeleteStatsByClientIdRequestDTOValidation\DeleteStatsByClientIdRequestDTOValidationContract;
 use App\Stats\Core\Contracts\Database\Repository\StatsRepositoryContract;
-use App\Stats\Core\UseCases\API\CreateStatsAPICase\CreateStatsAPICase;
-use App\Stats\Core\UseCases\API\CreateStatsAPICase\CreateStatsAPICaseContract;
-use App\Stats\Core\UseCases\API\DeleteStatsByClientIdAPICase\DeleteStatsByClientIdAPICase;
-use App\Stats\Core\UseCases\API\DeleteStatsByClientIdAPICase\DeleteStatsByClientIdAPICaseContract;
+use App\Stats\Core\UseCases\Service\CreateStatsServiceCase\CreateStatsServiceCase;
+use App\Stats\Core\UseCases\Service\CreateStatsServiceCase\CreateStatsServiceCaseContract;
+use App\Stats\Core\UseCases\Service\DeleteStatsByClientIdServiceCase\DeleteStatsByClientIdServiceCase;
+use App\Stats\Core\UseCases\Service\DeleteStatsByClientIdServiceCase\DeleteStatsByClientIdServiceCaseContract;
 use App\Stats\Infrastructure\Database\Repository\StatsRepository\StatsRepository;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function register(): void
     {
-        //External
-        $this->app->bind(CreateStatsAPIContract::class, CreateStatsAPI::class);
-        $this->app->bind(DeleteStatsByClientIdAPIContract::class, DeleteStatsByClientIdAPI::class);
+        // Service
+        $this->app->bind(CreateStatsServiceContract::class, CreateStatsService::class);
+        $this->app->bind(DeleteStatsByClientIdServiceContract::class, DeleteStatsByClientIdService::class);
 
-        //RequestDTOFactory
+        // RequestDTOFactory
         $this->app->bind(CreateStatsRequestDTOFactoryContract::class, CreateStatsRequestDTOFactory::class);
         $this->app->bind(DeleteStatsByClientIdRequestDTOFactoryContract::class, DeleteStatsByClientIdRequestDTOFactory::class);
 
-        //RequestDTOValidation
+        // RequestDTOValidation
         $this->app->bind(CreateStatsRequestDTOValidationContract::class, CreateStatsRequestDTOValidation::class);
         $this->app->bind(DeleteStatsByClientIdRequestDTOValidationContract::class, DeleteStatsByClientIdRequestDTOValidation::class);
 
-        //UseCase
-        $this->app->bind(CreateStatsAPICaseContract::class, CreateStatsAPICase::class);
-        $this->app->bind(DeleteStatsByClientIdAPICASEContract::class, DeleteStatsByClientIdAPICase::class);
+        // ServiceUseCase
+        $this->app->bind(CreateStatsServiceCaseContract::class, CreateStatsServiceCase::class);
+        $this->app->bind(DeleteStatsByClientIdServiceCaseContract::class, DeleteStatsByClientIdServiceCase::class);
 
-        //Repository
+        // Repository
         $this->app->bind(StatsRepositoryContract::class, StatsRepository::class);
     }
 }
