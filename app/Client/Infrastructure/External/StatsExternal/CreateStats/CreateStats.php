@@ -5,11 +5,11 @@ namespace App\Client\Infrastructure\External\StatsExternal\CreateStats;
 
 use App\Client\Core\Domain\Entity\Client\Client;
 use App\Client\Infrastructure\External\StatsExternal\StatsExternalException;
-use App\Stats\Application\API\CreateStatsAPI\CreateStatsAPIContract;
+use App\Stats\Application\Service\CreateStatsService\CreateStatsServiceContract;
 
 final readonly class CreateStats
 {
-    public function __construct(private CreateStatsAPIContract $createStatsAPI)
+    public function __construct(private CreateStatsServiceContract $createStatsAPI)
     {
     }
 
