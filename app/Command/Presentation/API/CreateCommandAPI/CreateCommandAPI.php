@@ -7,7 +7,7 @@ namespace App\Command\Presentation\API\CreateCommandAPI;
 use App\Command\Application\RequestDTOFactory\CreateCommandRequestDTOFactory\CreateCommandRequestDTOFactoryContract;
 use App\Command\Application\Service\CreateCommandService\CreateCommandServiceContract;
 use Exception;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 
 final readonly class CreateCommandAPI implements CreateCommandAPIContract
 {
@@ -17,14 +17,16 @@ final readonly class CreateCommandAPI implements CreateCommandAPIContract
     ) {
     }
 
-    public function create(int $clientId): void
+    public function create(int $clientId): JsonResponse
     {
         try {
-            $this->createCommandService->create(
-                $this->createCommandRequestDTOFactory->create($clientId)
+            return response()->json()->setJson(
+                $this->createCommandService->create(
+                    $this->createCommandRequestDTOFactory->create($clientId)
+                )->toJson()
             );
         } catch (Exception $exception) {
-            throw new HttpResponseException(response()->json()->setJson($exception->getMessage()));
+            return response()->json()->setJson($exception->getMessage());
         }
     }
 }

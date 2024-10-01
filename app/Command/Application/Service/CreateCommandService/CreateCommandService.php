@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Command\Application\Service\CreateCommandService;
 
+use App\Command\Application\Mapper\CreateCommandMapper\CreateCommandToDTOMapper\CreateCommandToDTOMapper;
+use App\Command\Application\Mapper\CreateCommandMapper\CreateCommandToValueObjectMapper\CreateCommandToValueObjectMapper;
 use App\Command\Application\RequestDTO\CreateCommandRequestDTO;
+use App\Command\Application\ResponseDTO\CreateCommandResponseDTO;
 use App\Command\Core\UseCases\Service\CreateCommandServiceCase\CreateCommandServiceCaseContract;
 
 final readonly class CreateCommandService implements CreateCommandServiceContract
@@ -14,10 +17,12 @@ final readonly class CreateCommandService implements CreateCommandServiceContrac
     ) {
     }
 
-    public function create(CreateCommandRequestDTO $createCommandRequestDTO): void
+    public function create(CreateCommandRequestDTO $createCommandRequestDTO): CreateCommandResponseDTO
     {
-        $this->createCommandServiceCase->create(
-            $createCommandRequestDTO
-        );
+        return CreateCommandToDTOMapper::map(
+            $this->createCommandServiceCase->create(
+                CreateCommandToValueObjectMapper::map($createCommandRequestDTO)->toClientId()
+            )
+        )->toResponseDTO();
     }
 }

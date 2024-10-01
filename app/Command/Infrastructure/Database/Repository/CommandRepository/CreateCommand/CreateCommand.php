@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Infrastructure\Database\Repository\CommandRepository\CreateCommand;
@@ -8,9 +9,9 @@ use App\Command\Infrastructure\Database\Models\Command as CommandModel;
 
 final readonly class CreateCommand
 {
-    public function create(Command $command): void
+    public function create(Command $command): bool
     {
-        (new CommandModel([
+        return (new CommandModel([
             'client_id' => $command->getClientId(),
             'command' => $command->getCommand(),
             'response' => $command->getResponse(),

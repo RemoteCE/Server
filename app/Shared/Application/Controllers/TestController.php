@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Shared\Application\Controllers;
 
-use App\Client\Presentation\API\CreateClientAPI\CreateClientAPI;
-use Faker\Factory;
+use App\Command\Presentation\API\CreateCommandAPI\CreateCommandAPI;
 
 class TestController
 {
-    public function test(CreateClientAPI $api)
+    public function test(CreateCommandAPI $api)
     {
-        return $api->create(Factory::create()->name, Factory::create()->ipv4());
+        return $api->create(1);
     }
 }
