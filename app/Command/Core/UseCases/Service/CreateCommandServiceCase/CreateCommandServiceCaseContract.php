@@ -1,15 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Core\UseCases\Service\CreateCommandServiceCase;
 
-use App\Command\Application\RequestDTO\CreateCommandRequestDTO;
+use App\Command\Core\Domain\Entity\Command\ValueObject\ClientIdValueObject;
+use App\Command\Core\Domain\Entity\Command\ValueObject\StatusValueObject;
 
 interface CreateCommandServiceCaseContract
 {
     /**
-     * @param CreateCommandRequestDTO $createCommandRequestDTO
-     * @return void
+     * @param ClientIdValueObject $clientIdValueObject
+     * @return StatusValueObject
      */
-    public function create(CreateCommandRequestDTO $createCommandRequestDTO): void;
+    public function create(ClientIdValueObject $clientIdValueObject): StatusValueObject;
 }

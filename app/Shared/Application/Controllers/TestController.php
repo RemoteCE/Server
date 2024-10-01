@@ -1,16 +1,15 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Shared\Application\Controllers;
 
-use App\Client\Presentation\API\CreateClientAPI\CreateClientAPI;
-use App\Client\Presentation\API\GetClientByUUIDAPI\GetClientByUUIDAPI;
-use Illuminate\Support\Str;
+use App\Command\Presentation\API\CreateCommandAPI\CreateCommandAPI;
 
 class TestController
 {
-    public function test(CreateClientAPI $api)
+    public function test(CreateCommandAPI $api)
     {
-        return $api->create(Str::uuid()->toString());
+        return $api->create(1);
     }
 }

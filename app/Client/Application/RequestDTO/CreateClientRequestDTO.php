@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Client\Application\RequestDTO;
@@ -6,17 +7,29 @@ namespace App\Client\Application\RequestDTO;
 final readonly class CreateClientRequestDTO implements RequestDTOContract
 {
 
-    public function __construct(private string $uuid){
-
+    public function __construct(
+        private ?string $name,
+        private ?string $ip
+    ) {
     }
 
-    public function getUuid(): string
+    public function getName(): string
     {
-        return $this->uuid;
+        return $this->name;
     }
 
-    public function toArray(): array{
-        return ['uuid' => $this->uuid];
+    public function getIp(): string
+    {
+        return $this->ip;
+    }
+
+
+    public function toArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'ip' => $this->ip,
+        ];
     }
 
     public function toJson(): string

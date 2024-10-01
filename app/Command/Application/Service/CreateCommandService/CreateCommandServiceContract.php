@@ -1,13 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Application\Service\CreateCommandService;
 
+use App\Command\Application\RequestDTO\CreateCommandRequestDTO;
+use App\Command\Application\ResponseDTO\CreateCommandResponseDTO;
+
 interface CreateCommandServiceContract
 {
     /**
-     * @param int $clientId
-     * @return void
+     * @param CreateCommandRequestDTO $createCommandRequestDTO
+     * @return CreateCommandResponseDTO
      */
-    public function create(int $clientId): void;
+    public function create(CreateCommandRequestDTO $createCommandRequestDTO): CreateCommandResponseDTO;
 }

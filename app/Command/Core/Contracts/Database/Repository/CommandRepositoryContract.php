@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Core\Contracts\Database\Repository;
@@ -9,9 +10,9 @@ interface CommandRepositoryContract
 {
     /**
      * @param Command $command
-     * @return void
+     * @return bool
      */
-    public function create(Command $command): void;
+    public function create(Command $command): bool;
 
     /**
      * @param int $clientId

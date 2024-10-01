@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Infrastructure\Database\Repository\CommandRepository;
@@ -15,13 +16,12 @@ final readonly class CommandRepository implements CommandRepositoryContract
         private CreateCommand $createCommand,
         private DeleteCommandByClientId $deleteCommandByClientId,
         private UpdateCommandByclientId $updateCommandByclientId,
-    )
-    {
+    ) {
     }
 
-    public function create(Command $command): void
+    public function create(Command $command): bool
     {
-        $this->createCommand->create($command);
+        return $this->createCommand->create($command);
     }
 
     public function deleteByClientId(int $clientId): void

@@ -1,15 +1,16 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Application\Service\UpdateCommandByClientIdService;
 
+use App\Command\Application\RequestDTO\UpdateCommandByClientIdRequestDTO;
+
 interface UpdateCommandByClientIdServiceContract
 {
     /**
-     * @param int $clientId
-     * @param string|null $command
-     * @param string|null $response
+     * @param UpdateCommandByClientIdRequestDTO $updateCommandByClientIdRequestDTO
      * @return void
      */
-    public function update(int $clientId, ?string $command, ?string $response): void;
+    public function update(UpdateCommandByClientIdRequestDTO $updateCommandByClientIdRequestDTO): void;
 }
