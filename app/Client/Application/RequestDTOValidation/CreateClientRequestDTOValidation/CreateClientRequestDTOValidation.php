@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Client\Application\RequestDTOValidation\CreateClientRequestDTOValidation;
@@ -11,10 +12,11 @@ final readonly class CreateClientRequestDTOValidation implements CreateClientReq
     public function validate(CreateClientRequestDTO $createClientRequestDTO): void
     {
         $validation = Validator::make($createClientRequestDTO->toArray(), [
-            'uuid' => ['required', 'uuid', 'unique:clients,uuid'],
+            'name' => ['string', 'required', 'max:255', 'nullable'],
+            'ip' => ['string', 'required', 'nullable', 'ipv4'],
         ]);
 
-        if($validation->fails()) {
+        if ($validation->fails()) {
             throw new CreateClientRequestDTOValidationException($validation->messages()->toJson());
         }
     }

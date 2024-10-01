@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Client\Application\RequestDTOFactory\CreateClientRequestDTOFactory;
@@ -9,9 +10,10 @@ use App\Client\Application\RequestDTOValidation\CreateClientRequestDTOValidation
 interface CreateClientRequestDTOFactoryContract
 {
     /**
-     * @param string $uuid
+     * @param ?string $name
+     * @param ?string $ip
      * @return CreateClientRequestDTO
      * @throws CreateClientRequestDTOValidationException
      */
-    public function create(string $uuid): CreateClientRequestDTO;
+    public function create(?string $name, ?string $ip): CreateClientRequestDTO;
 }

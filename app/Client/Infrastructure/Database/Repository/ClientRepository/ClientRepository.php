@@ -1,17 +1,15 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Client\Infrastructure\Database\Repository\ClientRepository;
 
 use App\Client\Core\Contracts\Database\Repository\ClientRepositoryContract;
 use App\Client\Core\Domain\Entity\Client\Client;
-use App\Client\Core\Domain\Entity\Client\Events\ClientCreatedEvent;
 use App\Client\Infrastructure\Database\Repository\ClientRepository\CreateClient\CreateClient;
 use App\Client\Infrastructure\Database\Repository\ClientRepository\DeleteClientById\DeleteClientById;
 use App\Client\Infrastructure\Database\Repository\ClientRepository\DeleteClientByUUID\DeleteClientByUUID;
-use App\Client\Infrastructure\Database\Repository\ClientRepository\GetClientById\ClientNotFoundByIdException;
 use App\Client\Infrastructure\Database\Repository\ClientRepository\GetClientById\GetClientById;
-use App\Client\Infrastructure\Database\Repository\ClientRepository\GetClientByUUID\ClientNotFoundByUUIDException;
 use App\Client\Infrastructure\Database\Repository\ClientRepository\GetClientByUUID\GetClientByUUID;
 
 readonly final class ClientRepository implements ClientRepositoryContract
@@ -22,13 +20,14 @@ readonly final class ClientRepository implements ClientRepositoryContract
         private DeleteClientByUUID $deleteClientByUUID,
         private GetClientById $getClientById,
         private GetClientByUUID $getClientByUUID,
-    )
-    {
+    ) {
     }
 
-    public function create(Client $client): void
+    public function create(Client $client): Client
     {
-        $this->createClient->create($client);
+        return Client::fromArray(
+            $this->createClient->create($client)->toArray()
+        );
     }
 
     public function deleteByUUID(string $uuid): void
@@ -50,7 +49,6 @@ readonly final class ClientRepository implements ClientRepositoryContract
     {
         return Client::fromArray($this->getClientById->getClient($id)->toArray());
     }
-
 
 
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Client\Infrastructure\External\CommandExternal;
@@ -12,9 +13,8 @@ final readonly class CommandExternal implements CommandExternalContract
 {
     public function __construct(
         private CreateCommand $createCommand,
-        private DeleteCommandByClientId $deleteCommandByClientId,
-    )
-    {
+        private DeleteCommandByClientId $deleteCommandByClientId
+    ) {
     }
 
     public function createCommand(Client $client): void

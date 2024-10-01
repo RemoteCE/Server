@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Client\Application\RequestDTOFactory\CreateClientRequestDTOFactory;
@@ -12,9 +13,9 @@ final readonly class CreateClientRequestDTOFactory implements CreateClientReques
     {
     }
 
-    public function create(string $uuid): CreateClientRequestDTO
+    public function create(?string $name, ?string $ip): CreateClientRequestDTO
     {
-        $CreateClientRequestDTO = new CreateClientRequestDTO($uuid);
+        $CreateClientRequestDTO = new CreateClientRequestDTO($name, $ip);
         $this->createClientRequestDTOValidation->validate($CreateClientRequestDTO);
 
         return $CreateClientRequestDTO;

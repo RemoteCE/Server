@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Client\Core\Contracts\Database\Repository;
@@ -11,9 +12,9 @@ interface ClientRepositoryContract
 {
     /**
      * @param Client $client
-     * @return void
+     * @return Client
      */
-    public function create(Client $client): void;
+    public function create(Client $client): Client;
 
     /**
      * @param string $uuid
