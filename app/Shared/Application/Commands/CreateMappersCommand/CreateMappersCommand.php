@@ -3,16 +3,15 @@
 namespace App\Shared\Application\Commands\CreateMappersCommand;
 
 use Illuminate\Console\Command;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class CreateMappersCommand extends Command
 {
     private string $service;
     private string $mapperName;
     private string $mapperBasePath;
+    private string $mapperPath;
 
     /**
      * The name and signature of the console command.
@@ -31,15 +30,17 @@ class CreateMappersCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(): Response
+    public function handle(): void
     {
         if ($this->argument('service') == "" || $this->argument('mapperName') == "") {
-            return response("service and mapperName required", ResponseAlias::HTTP_BAD_REQUEST);
+            echo 'service and mapperName required';
+            return;
         }
 
         $this->service = $this->argument('service');
         $this->mapperName = $this->argument('mapperName');
         $this->mapperBasePath = base_path("app/{$this->service}/Application/Mapper/");
+        $this->mapperPath = "{$this->mapperBasePath}/{$this->mapperName}Mapper/";
 
         $this->makeBaseContracts();
         $this->makeBaseException();
@@ -47,7 +48,30 @@ class CreateMappersCommand extends Command
         $this->makeToDTO();
         $this->makeToValueObject();
 
-        return response("OK!");
+        echo 'OK!';
+    }
+
+    private function makeFile(string|array $path, string $content = "sex"): void
+    {
+        if (is_array($path)) {
+            foreach ($path as $file => $content) {
+                if (!File::exists($file)) {
+                    if (!File::exists(dirname($file))) {
+                        File::makeDirectory(dirname($file), 0755, true);
+                    }
+                    File::put($file, $content);
+                }
+            }
+            return;
+        }
+
+        if (!File::exists($path)) {
+            if (!File::exists(dirname($path))) {
+                File::makeDirectory(dirname($path), 0755, true);
+                File::put($path, $content);
+            }
+        }
+        return;
     }
 
     private function makeToDTO(): void
@@ -56,22 +80,16 @@ class CreateMappersCommand extends Command
         $toDTOMapperContractName = "{$toDTOMapperName}Contract";
         $toDTOMapperExceptionName = "{$toDTOMapperName}Exception";
 
-        $toDTOMapperBasePath = base_path("app/{$this->service}/Application/Mapper/{$toDTOMapperName}/");
+        $toDTOMapperBasePath = "{$this->mapperPath}/{$toDTOMapperName}/";
         $toDTOMapperClassPath = "{$toDTOMapperBasePath}/{$toDTOMapperName}.php";
         $toDTOMapperContractPath = "{$toDTOMapperBasePath}/{$toDTOMapperContractName}.php";
         $toDTOMapperExceptionPath = "{$toDTOMapperBasePath}/{$toDTOMapperExceptionName}.php";
 
-        if (!File::exists($toDTOMapperClassPath)) {
-            File::put($toDTOMapperClassPath, $this->getToDTOMapperClassContent());
-        }
-
-        if (!File::exists($toDTOMapperContractPath)) {
-            File::put($toDTOMapperContractPath, $this->getToDTOMapperContractContent());
-        }
-
-        if (!File::exists($toDTOMapperExceptionPath)) {
-            File::put($toDTOMapperExceptionPath, $this->getToDTOMapperExceptionContent());
-        }
+        $this->makeFile([
+            $toDTOMapperClassPath => $this->getToDTOMapperClassContent(),
+            $toDTOMapperContractPath => $this->getToDTOMapperContractContent(),
+            $toDTOMapperExceptionPath => $this->getToDTOMapperExceptionContent()
+        ]);
     }
 
     private function makeToValueObject(): void
@@ -80,40 +98,30 @@ class CreateMappersCommand extends Command
         $toValueObjectMapperContractName = "{$toValueObjectMapperName}Contract";
         $toValueObjectMapperExceptionName = "{$toValueObjectMapperName}Exception";
 
-        $toValueObjectMapperBasePath = "{$this->mapperBasePath}/{$toValueObjectMapperName}";
+        $toValueObjectMapperBasePath = "{$this->mapperPath}/{$toValueObjectMapperName}/";
         $toValueObjectMapperClassPath = "{$toValueObjectMapperBasePath}/{$toValueObjectMapperName}.php";
         $toValueObjectMapperContractPath = "{$toValueObjectMapperBasePath}/{$toValueObjectMapperContractName}.php";
         $toValueObjectMapperExceptionPath = "{$toValueObjectMapperBasePath}/{$toValueObjectMapperExceptionName}.php";
 
-        if (!File::exists($toValueObjectMapperClassPath)) {
-            File::put($toValueObjectMapperClassPath, $this->getToValueObjectMapperClassContent());
-        }
-
-        if (!File::exists($toValueObjectMapperContractPath)) {
-            File::put($toValueObjectMapperContractPath, $this->getToValueObjectMapperContractContent());
-        }
-
-        if (!File::exists($toValueObjectMapperExceptionPath)) {
-            File::put($toValueObjectMapperExceptionPath, $this->getToValueObjectMapperExceptionContent());
-        }
+        $this->makeFile([
+            $toValueObjectMapperClassPath => $this->getToValueObjectMapperClassContent(),
+            $toValueObjectMapperContractPath => $this->getToValueObjectMapperContractContent(),
+            $toValueObjectMapperExceptionPath => $this->getToValueObjectMapperExceptionContent()
+        ]);
     }
 
     private function makeMapperException(): void
     {
-        $mapperExceptionPath = "{$this->mapperBasePath}/{$this->mapperName}Mapper/{$this->mapperName}MapperException.php";
+        $mapperExceptionPath = "{$this->mapperPath}/{$this->mapperName}MapperException.php";
 
-        if (!File::exists($mapperExceptionPath)) {
-            File::put($mapperExceptionPath, $this->getMapperExceptionContent());
-        }
+        $this->makeFile($mapperExceptionPath, $this->getMapperExceptionContent());
     }
 
     private function makeBaseException(): void
     {
         $baseExceptionPath = "{$this->mapperBasePath}/MapperException.php";
 
-        if (!File::exists($baseExceptionPath)) {
-            File::put($baseExceptionPath, $this->getBaseExceptionContent());
-        }
+        $this->makeFile($baseExceptionPath, $this->getBaseExceptionContent());
     }
 
     private function makeBaseContracts(): void
@@ -121,13 +129,10 @@ class CreateMappersCommand extends Command
         $toDTOMapperBaseContractPath = "{$this->mapperBasePath}/ToDTOMapperContract.php";
         $toValueObjectMapperBaseContractPath = "{$this->mapperBasePath}/ToValueObjectMapperContract.php";
 
-        if (!File::exists($toDTOMapperBaseContractPath)) {
-            File::put($toDTOMapperBaseContractPath, $this->getToDTOMapperBaseContractContent());
-        }
-
-        if (!File::exists($toValueObjectMapperBaseContractPath)) {
-            File::put($toValueObjectMapperBaseContractPath, $this->getToValueObjectMapperBaseContractContent());
-        }
+        $this->makeFile([
+            $toDTOMapperBaseContractPath => $this->getToDTOMapperBaseContractContent(),
+            $toValueObjectMapperBaseContractPath => $this->getToValueObjectMapperBaseContractContent()
+        ]);
     }
 
     private function getToDTOMapperClassContent(): string
