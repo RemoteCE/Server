@@ -1,9 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Infrastructure\Database\Repository\CommandRepository\DeleteCommandByClientId;
 
-use App\Client\Core\Domain\Entity\Client\Client;
 use App\Command\Infrastructure\Database\Models\Command as CommandModel;
 
 final readonly class DeleteCommandByClientId
@@ -12,8 +12,8 @@ final readonly class DeleteCommandByClientId
     {
     }
 
-    public function delete(int $clientId): void
+    public function delete(int $clientId): bool
     {
-        $this->model->where('client_id', $clientId)->delete();
+        return $this->model->where('client_id', $clientId)->delete();
     }
 }

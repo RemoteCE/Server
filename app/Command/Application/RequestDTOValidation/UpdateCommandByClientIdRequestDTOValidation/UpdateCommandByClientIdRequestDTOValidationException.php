@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Application\RequestDTOValidation\UpdateCommandByClientIdRequestDTOValidation;
 
-use Exception;
+use App\Command\Application\RequestDTOValidation\RequestDTOValidationException;
 
-class UpdateCommandByClientIdRequestDTOValidationException extends Exception
+class UpdateCommandByClientIdRequestDTOValidationException extends RequestDTOValidationException
 {
 
 }

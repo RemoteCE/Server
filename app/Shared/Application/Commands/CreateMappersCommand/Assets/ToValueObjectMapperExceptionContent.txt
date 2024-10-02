@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\{this.service}\Application\Mapper\{this.mapperName}Mapper\{this.mapperName}ToValueObjectMapper;
+
+use App\{this.service}\Application\Mapper\{this.mapperName}Mapper\{this.mapperName}MapperException;
+
+class {this.mapperName}ToValueObjectMapperException extends {this.mapperName}MapperException
+{
+    public function __construct(string $DTO, string $expectedDTO)
+    {
+        parent::__construct("Invalid DTO {$DTO}, expected {$expectedDTO}");
+    }
+}

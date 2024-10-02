@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\{this.service}\Application\Mapper;
+
+use TypeError;
+
+class MapperException extends TypeError
+{
+
+}

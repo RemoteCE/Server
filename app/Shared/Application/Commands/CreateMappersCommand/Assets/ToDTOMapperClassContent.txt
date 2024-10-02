@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\{this.service}\Application\Mapper\{this.mapperName}Mapper\{this.mapperName}ToDTOMapper;
+
+use App\{this.service}\Core\Domain\Entity\ValueObjectContract;
+
+final readonly class {this.mapperName}ToDTOMapper implements {this.mapperName}ToDTOMapperContract
+{
+    private function __construct(
+        private ValueObjectContract $valueObject
+    ) {
+    }
+
+    public static function map(ValueObjectContract $valueObject): self
+    {
+        if (!($valueObject instanceof ValueObjectContract)) {
+            throw new {this.mapperName}ToDTOMapperException($valueObject::class, ValueObjectContract::class);
+        }
+
+        return new self($valueObject);
+    }
+}

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Command\Presentation\API\CreateCommandAPI;
 
 use App\Command\Application\RequestDTOFactory\CreateCommandRequestDTOFactory\CreateCommandRequestDTOFactoryContract;
+use App\Command\Application\RequestDTOValidation\RequestDTOValidationException;
 use App\Command\Application\Service\CreateCommandService\CreateCommandServiceContract;
-use Exception;
 use Illuminate\Http\JsonResponse;
 
 final readonly class CreateCommandAPI implements CreateCommandAPIContract
@@ -25,7 +25,7 @@ final readonly class CreateCommandAPI implements CreateCommandAPIContract
                     $this->createCommandRequestDTOFactory->create($clientId)
                 )->toJson()
             );
-        } catch (Exception $exception) {
+        } catch (RequestDTOValidationException $exception) {
             return response()->json()->setJson($exception->getMessage());
         }
     }

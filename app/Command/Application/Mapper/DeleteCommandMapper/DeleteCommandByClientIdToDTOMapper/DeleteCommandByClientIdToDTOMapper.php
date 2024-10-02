@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Command\Application\Mapper\CreateCommandMapper\CreateCommandToDTOMapper;
+namespace App\Command\Application\Mapper\DeleteCommandMapper\DeleteCommandByClientIdToDTOMapper;
 
-use App\Command\Application\ResponseDTO\CreateCommandResponseDTO;
+use App\Command\Application\ResponseDTO\DeleteCommandByClientIdResponseDTO;
 use App\Command\Core\Domain\Entity\Command\ValueObject\StatusValueObject;
 use App\Command\Core\Domain\Entity\ValueObjectContract;
 
-final readonly class CreateCommandToDTOMapper implements CreateCommandToDTOMapperContract
+final readonly class DeleteCommandByClientIdToDTOMapper implements DeleteCommandByClientIdToDTOMapperContract
 {
     private function __construct(
         private StatusValueObject $statusValueObject
@@ -18,15 +18,15 @@ final readonly class CreateCommandToDTOMapper implements CreateCommandToDTOMappe
     public static function map(ValueObjectContract $valueObject): self
     {
         if (!($valueObject instanceof StatusValueObject)) {
-            throw new CreateCommandToDTOMapperException($valueObject::class, ValueObjectContract::class);
+            throw new DeleteCommandByClientIdToDTOMapperException($valueObject::class, ValueObjectContract::class);
         }
 
         return new self($valueObject);
     }
 
-    public function toResponseDTO(): CreateCommandResponseDTO
+    public function toResponseDTO(): DeleteCommandByClientIdResponseDTO
     {
-        return new CreateCommandResponseDTO(
+        return new DeleteCommandByClientIdResponseDTO(
             $this->statusValueObject->getStatus()
         );
     }

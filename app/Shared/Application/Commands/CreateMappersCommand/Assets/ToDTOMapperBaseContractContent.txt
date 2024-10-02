@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Command\Application\Mapper;
+namespace App\{this.service}\Application\Mapper;
 
-use App\Command\Core\Domain\Entity\ValueObjectContract;
+use App\{this.service}\Core\Domain\Entity\ValueObjectContract;
 
 interface ToDTOMapperContract
 {

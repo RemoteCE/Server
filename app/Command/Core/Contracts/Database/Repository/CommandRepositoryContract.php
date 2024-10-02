@@ -16,9 +16,9 @@ interface CommandRepositoryContract
 
     /**
      * @param int $clientId
-     * @return void
+     * @return bool
      */
-    public function deleteByClientId(int $clientId): void;
+    public function deleteByClientId(int $clientId): bool;
 
     /**
      * @param int $clientId
