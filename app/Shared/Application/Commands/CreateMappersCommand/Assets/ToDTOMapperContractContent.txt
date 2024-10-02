@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\{this.service}\Application\Mapper\D{this.mapperName}Mapper\{this.mapperName}ToDTOMapper;
+namespace App\{this.service}\Application\Mapper\{this.mapperName}Mapper\{this.mapperName}ToDTOMapper;
 
 use App\{this.service}\Application\Mapper\ToDTOMapperContract;
 
