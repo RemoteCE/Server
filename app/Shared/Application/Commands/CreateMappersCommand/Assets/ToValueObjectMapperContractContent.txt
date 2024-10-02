@@ -1,0 +1,11 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\{this.service}\Application\Mapper\{this.mapperName}Mapper\{this.mapperName}ToValueObjectMapper;
+
+use App\{this.service}\Application\Mapper\ToValueObjectMapperContract;
+
+interface {this.mapperName}ToValueObjectMapperContract extends ToValueObjectMapperContract
+{
+}

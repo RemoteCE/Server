@@ -1,0 +1,11 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\{this.service}\Application\Mapper\D{this.mapperName}Mapper\{this.mapperName}ToDTOMapper;
+
+use App\{this.service}\Application\Mapper\ToDTOMapperContract;
+
+interface {this.mapperName}ToDTOMapperContract extends ToDTOMapperContract
+{
+}

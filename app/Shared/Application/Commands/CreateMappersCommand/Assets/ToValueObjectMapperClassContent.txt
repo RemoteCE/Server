@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\{this.service}\Application\Mapper\{this.mapperName}Mapper\D{this.mapperName}ToValueObjectMapper;
+
+use App\{this.service}\Application\RequestDTO\RequestDTOContract;
+
+final readonly class {this.mapperName}ToValueObjectMapper implements {this.mapperName}ToValueObjectMapperContract
+{
+    private function __construct(private RequestDTOContract $RequestDTO)
+    {
+    }
+
+    public static function map(RequestDTOContract $requestDTO): self
+    {
+        if (!($requestDTO instanceof CreateCommandRequestDTO)) {
+            throw new {this.mapperName}ToValueObjectMapperException(
+                $requestDTO::class,
+                RequestDTOContract::class
+            );
+        }
+
+        return new self($requestDTO);
+    }
+}

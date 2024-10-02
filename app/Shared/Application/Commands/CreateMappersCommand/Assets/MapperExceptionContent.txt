@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\{this.service}\Application\Mapper\{this.mapperName}Mapper;
+
+use App\{this.service}\Application\Mapper\MapperException;
+
+class {this.mapperName}MapperException extends MapperException
+{
+
+}

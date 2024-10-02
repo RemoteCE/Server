@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Command\Presentation\API\DeleteCommandByClientIdAPI;
 
 use App\Command\Application\RequestDTOFactory\DeleteCommandByClientIdRequestDTOFactory\DeleteCommandByClientIdRequestDTOFactoryContract;
+use App\Command\Application\RequestDTOValidation\RequestDTOValidationException;
 use App\Command\Application\Service\DeleteCommandByClientIdService\DeleteCommandByClientIdServiceContract;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 
 final readonly class DeleteCommandByClientIdAPI implements DeleteCommandByClientIdAPIContract
 {
@@ -16,14 +17,16 @@ final readonly class DeleteCommandByClientIdAPI implements DeleteCommandByClient
     ) {
     }
 
-    public function delete(int $clientId): void
+    public function delete(int $clientId): JsonResponse
     {
         try {
-            $this->deleteCommandByClientIdService->delete(
-                $this->deleteCommandByClientIdRequestDTOFactory->create($clientId)
+            return response()->json()->setJson(
+                $this->deleteCommandByClientIdService->delete(
+                    $this->deleteCommandByClientIdRequestDTOFactory->create($clientId)
+                )->toJson()
             );
-        } catch (\Exception $exception) {
-            throw new HttpResponseException(response()->json()->setJson($exception->getMessage()));
+        } catch (RequestDTOValidationException $exception) {
+            return response()->json()->setJson($exception->getMessage());
         }
     }
 }
