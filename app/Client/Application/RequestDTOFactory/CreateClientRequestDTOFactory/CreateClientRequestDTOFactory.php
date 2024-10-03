@@ -13,12 +13,10 @@ final readonly class CreateClientRequestDTOFactory implements CreateClientReques
     {
     }
 
-    public function create(?string $name, ?string $ip): CreateClientRequestDTO
+    public function create(array $data): CreateClientRequestDTO
     {
-        $CreateClientRequestDTO = new CreateClientRequestDTO($name, $ip);
-        $this->createClientRequestDTOValidation->validate($CreateClientRequestDTO);
-
-        return $CreateClientRequestDTO;
+        $this->createClientRequestDTOValidation->validate($data);
+        return CreateClientRequestDTO::fromArray($data);
     }
 
 }

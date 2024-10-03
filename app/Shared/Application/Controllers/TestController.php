@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Shared\Application\Controllers;
 
-use App\Command\Presentation\API\CreateCommandAPI\CreateCommandAPI;
+use App\Stats\Presentation\API\CreateStatsAPI\CreateStatsAPI;
 
 class TestController
 {
-    public function test(CreateCommandAPI $api)
+    public function test(CreateStatsAPI $api)
     {
-        return $api->create(1);
+        return $api->create([
+            'clientId' => 1
+        ]);
     }
 }

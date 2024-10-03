@@ -15,10 +15,9 @@ final readonly class DeleteCommandByClientIdRequestDTOFactory implements
     ) {
     }
 
-    public function create(string $clientId): DeleteCommandByClientIdRequestDTO
+    public function create(array $data): DeleteCommandByClientIdRequestDTO
     {
-        $DeleteCommandByClientIdRequestDTO = new DeleteCommandByClientIdRequestDTO($clientId);
-        $this->deleteCommandByClientIdRequestDTOValidation->validate($DeleteCommandByClientIdRequestDTO);
-        return $DeleteCommandByClientIdRequestDTO;
+        $this->deleteCommandByClientIdRequestDTOValidation->validate($data);
+        return DeleteCommandByClientIdRequestDTO::fromArray($data);
     }
 }

@@ -10,9 +10,9 @@ use App\Command\Application\RequestDTOValidation\DeleteCommandByClientIdRequestD
 interface DeleteCommandByClientIdRequestDTOFactoryContract
 {
     /**
-     * @param string $clientId
+     * @param array $data
      * @return DeleteCommandByClientIdRequestDTO
      * @throws DeleteCommandByClientIdRequestDTOValidationException
      */
-    public function create(string $clientId): DeleteCommandByClientIdRequestDTO;
+    public function create(array $data): DeleteCommandByClientIdRequestDTO;
 }

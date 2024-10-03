@@ -13,11 +13,10 @@ final readonly class CreateCommandRequestDTOFactory implements CreateCommandRequ
     {
     }
 
-    public function create(string $clientId): CreateCommandRequestDTO
+    public function create(array $data): CreateCommandRequestDTO
     {
-        $createCommandRequestDTO = new CreateCommandRequestDTO($clientId);
-        $this->createCommandRequestDTOValidation->validate($createCommandRequestDTO);
-        return $createCommandRequestDTO;
+        $this->createCommandRequestDTOValidation->validate($data);
+        return createCommandRequestDTO::fromArray($data);
     }
 
 }

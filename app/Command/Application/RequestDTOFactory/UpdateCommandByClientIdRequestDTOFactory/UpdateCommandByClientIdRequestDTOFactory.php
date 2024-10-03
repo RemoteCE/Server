@@ -15,20 +15,10 @@ final readonly class UpdateCommandByClientIdRequestDTOFactory implements
     ) {
     }
 
-    public function create(
-        string $clientId,
-        ?string $newClientId,
-        ?string $command,
-        ?string $response
-    ): UpdateCommandByClientIdRequestDTO {
-        $UpdateCommandByClientIdRequestDTO = new UpdateCommandByClientIdRequestDTO(
-            $clientId,
-            $newClientId,
-            $command,
-            $response
-        );
-        $this->updateCommandByClientIdRequestDTOValidation->validate($UpdateCommandByClientIdRequestDTO);
-        return $UpdateCommandByClientIdRequestDTO;
+    public function create(array $data): UpdateCommandByClientIdRequestDTO
+    {
+        $this->updateCommandByClientIdRequestDTOValidation->validate($data);
+        return UpdateCommandByClientIdRequestDTO::fromArray($data);
     }
 
 }

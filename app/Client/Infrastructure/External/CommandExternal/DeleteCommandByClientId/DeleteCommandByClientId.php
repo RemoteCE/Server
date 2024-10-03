@@ -4,21 +4,26 @@ declare(strict_types=1);
 
 namespace App\Client\Infrastructure\External\CommandExternal\DeleteCommandByClientId;
 
-use App\Command\Application\RequestDTOFactory\DeleteCommandByClientIdRequestDTOFactory\DeleteCommandByClientIdRequestDTOFactoryContract;
-use App\Command\Application\Service\DeleteCommandByClientIdService\DeleteCommandByClientIdServiceContract;
+use App\Client\Infrastructure\External\CommandExternal\CommandExternalException;
+use App\Command\Presentation\API\DeleteCommandByClientIdAPI\DeleteCommandByClientIdAPI;
 
 final readonly class DeleteCommandByClientId
 {
     public function __construct(
-        private DeleteCommandByClientIdServiceContract $deleteCommandByClientIdAPI,
-        private DeleteCommandByClientIdRequestDTOFactoryContract $deleteCommandByClientIdRequestDTOFactory
+        private DeleteCommandByClientIdAPI $deleteCommandByClientIdAPI,
     ) {
     }
 
+    /**
+     * @param int $clientId
+     * @return void
+     * @throws CommandExternalException
+     */
     public function delete(int $clientId): void
     {
-        $this->deleteCommandByClientIdAPI->delete(
-            $this->deleteCommandByClientIdRequestDTOFactory->create($clientId)
-        );
+        $response = $this->deleteCommandByClientIdAPI->delete(['clientId' => $clientId]);
+        if (!($response->getData(true)['status'])) {
+            throw new CommandExternalException($response->getContent());
+        }
     }
 }

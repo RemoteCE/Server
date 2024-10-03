@@ -8,8 +8,9 @@ use App\Command\Application\RequestDTOFactory\UpdateCommandByClientIdRequestDTOF
 use App\Command\Application\RequestDTOValidation\RequestDTOValidationException;
 use App\Command\Application\Service\UpdateCommandByClientIdService\UpdateCommandByClientIdServiceContract;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
-final readonly class UpdateCommandByClientIdAPI implements UpdateCommandByClientIdAPIContract
+final readonly class UpdateCommandByClientIdAPI
 {
     public function __construct(
         private UpdateCommandByClientIdServiceContract $updateCommandByClientIdService,
@@ -17,21 +18,18 @@ final readonly class UpdateCommandByClientIdAPI implements UpdateCommandByClient
     ) {
     }
 
-    public function update(string $clientId, ?string $newClientId, ?string $command, ?string $response): JsonResponse
+    public function update(array $data): JsonResponse
     {
         try {
             return response()->json()->setJson(
                 $this->updateCommandByClientIdService->update(
-                    $this->updateCommandByClientIdRequestDTOFactory->create(
-                        $clientId,
-                        $newClientId,
-                        $command,
-                        $response
-                    )
+                    $this->updateCommandByClientIdRequestDTOFactory->create($data)
                 )->toJson()
             );
         } catch (RequestDTOValidationException $exception) {
-            return response()->json()->setJson($exception->getMessage());
+            return response()->json()->setJson(
+                $exception->getMessage()
+            )->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
 }

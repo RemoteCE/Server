@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace App\Command\Application\RequestDTOValidation\UpdateCommandByClientIdRequestDTOValidation;
 
-use App\Command\Application\RequestDTO\UpdateCommandByClientIdRequestDTO;
 use Illuminate\Support\Facades\Validator;
 
 class UpdateCommandByClientIdRequestDTOValidation implements UpdateCommandByClientIdRequestDTOValidationContract
 {
 
-    public function validate(UpdateCommandByClientIdRequestDTO $updateCommandByClientIdRequestDTO): void
+    public function validate(array $data): void
     {
-        $validation = Validator::make($updateCommandByClientIdRequestDTO->toArray(), [
+        $validation = Validator::make($data, [
             'clientId' => ['required', 'integer', 'exists:clients,id'],
             'newClientId' => ['required', 'integer', 'nullable', 'exists:clients,id'],
             'command' => ['required', 'string', 'nullable'],

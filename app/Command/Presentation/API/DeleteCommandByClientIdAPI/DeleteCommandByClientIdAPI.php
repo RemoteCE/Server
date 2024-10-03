@@ -8,8 +8,9 @@ use App\Command\Application\RequestDTOFactory\DeleteCommandByClientIdRequestDTOF
 use App\Command\Application\RequestDTOValidation\RequestDTOValidationException;
 use App\Command\Application\Service\DeleteCommandByClientIdService\DeleteCommandByClientIdServiceContract;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
-final readonly class DeleteCommandByClientIdAPI implements DeleteCommandByClientIdAPIContract
+final readonly class DeleteCommandByClientIdAPI
 {
     public function __construct(
         private DeleteCommandByClientIdServiceContract $deleteCommandByClientIdService,
@@ -17,16 +18,18 @@ final readonly class DeleteCommandByClientIdAPI implements DeleteCommandByClient
     ) {
     }
 
-    public function delete(string $clientId): JsonResponse
+    public function delete(array $data): JsonResponse
     {
         try {
             return response()->json()->setJson(
                 $this->deleteCommandByClientIdService->delete(
-                    $this->deleteCommandByClientIdRequestDTOFactory->create($clientId)
+                    $this->deleteCommandByClientIdRequestDTOFactory->create($data)
                 )->toJson()
             );
         } catch (RequestDTOValidationException $exception) {
-            return response()->json()->setJson($exception->getMessage());
+            return response()->json()->setJson(
+                $exception->getMessage()
+            )->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
 }

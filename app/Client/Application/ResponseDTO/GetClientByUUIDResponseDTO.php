@@ -55,4 +55,15 @@ final readonly class GetClientByUUIDResponseDTO implements ResponseDTOContract
         return json_encode($this->toArray());
     }
 
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            $data['status'],
+            $data['id'] ?? null,
+            $data['uuid'] ?? null,
+            $data['name'] ?? null,
+            $data['ip'] ?? null
+        );
+    }
+
 }

@@ -10,17 +10,9 @@ use App\Command\Application\RequestDTOValidation\UpdateCommandByClientIdRequestD
 interface UpdateCommandByClientIdRequestDTOFactoryContract
 {
     /**
-     * @param string $clientId
-     * @param ?string $newClientId
-     * @param ?string $command
-     * @param ?string $response
+     * @param array $data
      * @return UpdateCommandByClientIdRequestDTO
      * @throws UpdateCommandByClientIdRequestDTOValidationException
      */
-    public function create(
-        string $clientId,
-        ?string $newClientId,
-        ?string $command,
-        ?string $response
-    ): UpdateCommandByClientIdRequestDTO;
+    public function create(array $data): UpdateCommandByClientIdRequestDTO;
 }

@@ -1,16 +1,15 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Application\RequestDTOValidation\CreateCommandRequestDTOValidation;
 
-use App\Command\Application\RequestDTO\CreateCommandRequestDTO;
-
 interface CreateCommandRequestDTOValidationContract
 {
     /**
-     * @param CreateCommandRequestDTO $createCommandRequestDTO
+     * @param array $data
      * @return void
      * @throws CreateCommandRequestDTOValidationException
      */
-    public function validate(CreateCommandRequestDTO $createCommandRequestDTO): void;
+    public function validate(array $data): void;
 }

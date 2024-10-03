@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Client\Application\RequestDTOFactory\GetClientByUUIDRequestDTOFactory;
@@ -9,9 +10,9 @@ use App\Client\Application\RequestDTOValidation\GetClientByUUIDRequestDTOValidat
 interface GetClientByUUIDRequestDTOFactoryContract
 {
     /**
-     * @param string $uuid
+     * @param array $data
      * @return GetClientByUUIDRequestDTO
      * @throws GetClientByUUIDRequestDTOValidationException
      */
-    public function create(string $uuid): GetClientByUUIDRequestDTO;
+    public function create(array $data): GetClientByUUIDRequestDTO;
 }

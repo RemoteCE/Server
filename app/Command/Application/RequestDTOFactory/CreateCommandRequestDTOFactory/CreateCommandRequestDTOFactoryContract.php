@@ -10,9 +10,9 @@ use App\Command\Application\RequestDTOValidation\CreateCommandRequestDTOValidati
 interface CreateCommandRequestDTOFactoryContract
 {
     /**
-     * @param string $clientId
+     * @param array $data
      * @return CreateCommandRequestDTO
      * @throws CreateCommandRequestDTOValidationException
      */
-    public function create(string $clientId): CreateCommandRequestDTO;
+    public function create(array $data): CreateCommandRequestDTO;
 }

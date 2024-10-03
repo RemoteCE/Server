@@ -1,22 +1,22 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Application\RequestDTOValidation\DeleteCommandByClientIdRequestDTOValidation;
 
-use App\Command\Application\RequestDTO\DeleteCommandByClientIdRequestDTO;
 use Illuminate\Support\Facades\Validator;
 
 class DeleteCommandByClientIdRequestDTOValidation implements DeleteCommandByClientIdRequestDTOValidationContract
 {
 
 
-    public function validate(DeleteCommandByClientIdRequestDTO $deleteCommandByClientIdRequestDTO): void
+    public function validate(array $data): void
     {
-        $validation = Validator::make($deleteCommandByClientIdRequestDTO->toArray(), [
+        $validation = Validator::make($data, [
             'clientId' => ['required', 'integer'],
         ]);
 
-        if($validation->fails()) {
+        if ($validation->fails()) {
             throw new DeleteCommandByClientIdRequestDTOValidationException($validation->messages()->toJson());
         }
     }

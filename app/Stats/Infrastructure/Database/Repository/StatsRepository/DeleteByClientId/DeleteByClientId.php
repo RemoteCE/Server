@@ -14,6 +14,7 @@ class DeleteByClientId
 
     public function delete(int $clientId): bool
     {
-        return $this->model->where('client_id', $clientId)->delete();
+        $this->model->where('client_id', $clientId)->delete();
+        return true;
     }
 }

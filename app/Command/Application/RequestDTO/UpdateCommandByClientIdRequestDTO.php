@@ -7,19 +7,19 @@ namespace App\Command\Application\RequestDTO;
 final readonly class UpdateCommandByClientIdRequestDTO implements RequestDTOContract
 {
     public function __construct(
-        private string $clientId,
-        private ?string $newClientId,
+        private int $clientId,
+        private ?int $newClientId,
         private ?string $command,
         private ?string $response
     ) {
     }
 
-    public function getClientId(): string
+    public function getClientId(): int
     {
         return $this->clientId;
     }
 
-    public function getNewClientId(): ?string
+    public function getNewClientId(): ?int
     {
         return $this->newClientId;
     }
@@ -48,5 +48,15 @@ final readonly class UpdateCommandByClientIdRequestDTO implements RequestDTOCont
     public function toJson(): string
     {
         return json_encode($this->toArray());
+    }
+
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            $data['clientId'],
+            $data['newClientId'] ?? null,
+            $data['command'] ?? null,
+            $data['response'] ?? null
+        );
     }
 }
