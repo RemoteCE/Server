@@ -8,6 +8,7 @@ use App\Stats\Application\RequestDTOFactory\CreateStatsRequestDTOFactory\CreateS
 use App\Stats\Application\RequestDTOValidation\RequestDTOValidationException;
 use App\Stats\Application\Service\CreateStatsService\CreateStatsServiceContract;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 final readonly class CreateStatsAPI
 {
@@ -26,7 +27,11 @@ final readonly class CreateStatsAPI
                 )->toJson()
             );
         } catch (RequestDTOValidationException $exception) {
-            return response()->json()->setJson($exception->getMessage());
+            return response()->json()->setJson(
+                $exception->getMessage()
+            )->setStatusCode(
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
         }
     }
 }

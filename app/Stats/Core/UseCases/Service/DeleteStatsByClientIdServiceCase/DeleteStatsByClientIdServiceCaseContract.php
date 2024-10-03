@@ -1,15 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Stats\Core\UseCases\Service\DeleteStatsByClientIdServiceCase;
 
-use App\Stats\Application\RequestDTO\DeleteStatsByClientIdRequestDTO;
+use App\Stats\Core\Domain\Entity\Stats\ValueObject\ClientIdValueObject;
+use App\Stats\Core\Domain\Entity\Stats\ValueObject\StatusValueObject;
 
 interface DeleteStatsByClientIdServiceCaseContract
 {
     /**
-     * @param DeleteStatsByClientIdRequestDTO $deleteStatsByClientIdDTO
-     * @return void
+     * @param ClientIdValueObject $clientIdValueObject
+     * @return StatusValueObject
      */
-    public function delete(DeleteStatsByClientIdRequestDTO $deleteStatsByClientIdDTO): void;
+    public function delete(ClientIdValueObject $clientIdValueObject): StatusValueObject;
 }

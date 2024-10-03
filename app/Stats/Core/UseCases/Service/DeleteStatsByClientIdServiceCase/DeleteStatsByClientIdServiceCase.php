@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Stats\Core\UseCases\Service\DeleteStatsByClientIdServiceCase;
 
-use App\Stats\Application\RequestDTO\DeleteStatsByClientIdRequestDTO;
+use App\Stats\Core\Domain\Entity\Stats\ValueObject\ClientIdValueObject;
+use App\Stats\Core\Domain\Entity\Stats\ValueObject\StatusValueObject;
 use App\Stats\Infrastructure\Database\Repository\StatsRepository\StatsRepository;
 
 final readonly class DeleteStatsByClientIdServiceCase implements DeleteStatsByClientIdServiceCaseContract
@@ -12,8 +14,12 @@ final readonly class DeleteStatsByClientIdServiceCase implements DeleteStatsByCl
     {
     }
 
-    public function delete(DeleteStatsByClientIdRequestDTO $deleteStatsByClientIdDTO): void
+    public function delete(ClientIdValueObject $clientIdValueObject): StatusValueObject
     {
-        $this->statsRepository->deleteByClientId($deleteStatsByClientIdDTO->getClientId());
+        return new StatusValueObject(
+            $this->statsRepository->deleteByClientId(
+                $clientIdValueObject->getClientId()
+            )
+        );
     }
 }

@@ -22,9 +22,9 @@ final readonly class StatsRepository implements StatsRepositoryContract
         return $this->createStats->create($stats);
     }
 
-    public function deleteByClientId(int $clientId): void
+    public function deleteByClientId(int $clientId): bool
     {
-        $this->deleteByClientId->delete($clientId);
+        return $this->deleteByClientId->delete($clientId);
     }
 
 

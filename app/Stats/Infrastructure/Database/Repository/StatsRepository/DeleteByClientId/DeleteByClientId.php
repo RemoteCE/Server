@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Stats\Infrastructure\Database\Repository\StatsRepository\DeleteByClientId;
@@ -11,8 +12,8 @@ class DeleteByClientId
     {
     }
 
-    public function delete(int $clientId): void
+    public function delete(int $clientId): bool
     {
-        $this->model->where('client_id', $clientId)->delete();
+        return $this->model->where('client_id', $clientId)->delete();
     }
 }

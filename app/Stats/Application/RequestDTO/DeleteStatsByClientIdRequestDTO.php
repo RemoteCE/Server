@@ -1,11 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Stats\Application\RequestDTO;
 
 final readonly class DeleteStatsByClientIdRequestDTO implements RequestDTOContract
 {
-    public function __construct(private int $clientId){}
+    public function __construct(private int $clientId)
+    {
+    }
 
     public function getClientId(): int
     {
@@ -22,6 +25,11 @@ final readonly class DeleteStatsByClientIdRequestDTO implements RequestDTOContra
     public function toJson(): string
     {
         return json_encode($this->toArray());
+    }
+
+    public static function fromArray(array $data): self
+    {
+        return new self($data['clientId']);
     }
 
 }
