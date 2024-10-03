@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Application\RequestDTOFactory\DeleteCommandByClientIdRequestDTOFactory;
@@ -9,9 +10,9 @@ use App\Command\Application\RequestDTOValidation\DeleteCommandByClientIdRequestD
 interface DeleteCommandByClientIdRequestDTOFactoryContract
 {
     /**
-     * @param int $clientId
+     * @param array $data
      * @return DeleteCommandByClientIdRequestDTO
      * @throws DeleteCommandByClientIdRequestDTOValidationException
      */
-    public function create(int $clientId): DeleteCommandByClientIdRequestDTO;
+    public function create(array $data): DeleteCommandByClientIdRequestDTO;
 }

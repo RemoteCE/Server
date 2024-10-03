@@ -1,16 +1,15 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Stats\Application\RequestDTOValidation\DeleteStatsByClientIdRequestDTOValidation;
 
-use App\Stats\Application\RequestDTO\DeleteStatsByClientIdRequestDTO;
-
 interface DeleteStatsByClientIdRequestDTOValidationContract
 {
     /**
-     * @param DeleteStatsByClientIdRequestDTO $deleteStatsByClientIdDTO
+     * @param array $data
      * @return void
-     * @throws DeleteStatsByClientIdRequestDTOValidationException
+     * @throws DeleteStatsByClientIdRequestRequestDTOValidationException
      */
-    public function validate(DeleteStatsByClientIdRequestDTO $deleteStatsByClientIdDTO): void;
+    public function validate(array $data): void;
 }

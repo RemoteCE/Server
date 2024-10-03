@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Stats\Infrastructure\Database\Repository\StatsRepository;
@@ -13,19 +14,17 @@ final readonly class StatsRepository implements StatsRepositoryContract
     public function __construct(
         private CreateStats $createStats,
         private DeleteByClientId $deleteByClientId,
-    )
-    {
-
+    ) {
     }
 
-    public function create(Stats $stats): void
+    public function create(Stats $stats): bool
     {
-        $this->createStats->create($stats);
+        return $this->createStats->create($stats);
     }
 
-    public function deleteByClientId(int $clientId): void
+    public function deleteByClientId(int $clientId): bool
     {
-        $this->deleteByClientId->delete($clientId);
+        return $this->deleteByClientId->delete($clientId);
     }
 
 

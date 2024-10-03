@@ -36,4 +36,9 @@ final readonly class CreateClientResponseDTO implements ResponseDTOContract
     {
         return json_encode($this->toArray());
     }
+
+    public static function fromArray(array $data): self
+    {
+        return new self($data['status'], $data['uuid'] ?? null);
+    }
 }

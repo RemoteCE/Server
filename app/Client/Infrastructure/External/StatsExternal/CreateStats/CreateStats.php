@@ -6,15 +6,12 @@ namespace App\Client\Infrastructure\External\StatsExternal\CreateStats;
 
 use App\Client\Core\Domain\Entity\Client\Client;
 use App\Client\Infrastructure\External\StatsExternal\StatsExternalException;
-use App\Stats\Application\RequestDTOFactory\CreateStatsRequestDTOFactory\CreateStatsRequestDTOFactoryContract;
-use App\Stats\Application\Service\CreateStatsService\CreateStatsServiceContract;
+use App\Stats\Presentation\API\CreateStatsAPI\CreateStatsAPI;
 
 final readonly class CreateStats
 {
     public function __construct(
-        private CreateStatsServiceContract $createStatsAPI,
-        private CreateStatsRequestDTOFactoryContract $createStatsRequestDTOFactory
-
+        private CreateStatsAPI $createStatsAPI,
     ) {
     }
 
@@ -26,10 +23,9 @@ final readonly class CreateStats
      */
     public function createStats(Client $client): void
     {
-        try {
-            $this->createStatsAPI->create($client->getId());
-        } catch (\Exception $e) {
-            throw new StatsExternalException($e->getMessage());
+        $response = $this->createStatsAPI->create(['clientId' => $client->getId()]);
+        if (!($response->getData(true)['status'])) {
+            throw new StatsExternalException($response->getContent());
         }
     }
 }

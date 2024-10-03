@@ -1,11 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Core\UseCases\Service\UpdateCommandByClientIdServiceCase;
 
-use App\Command\Application\RequestDTO\UpdateCommandByClientIdRequestDTO;
 use App\Command\Core\Contracts\Database\Repository\CommandRepositoryContract;
 use App\Command\Core\Domain\Entity\Command\Command;
+use App\Command\Core\Domain\Entity\Command\ValueObject\ClientIdValueObject;
+use App\Command\Core\Domain\Entity\Command\ValueObject\CommandValueObject;
+use App\Command\Core\Domain\Entity\Command\ValueObject\StatusValueObject;
 
 final readonly class UpdateCommandByClientIdServiceCase implements UpdateCommandByClientIdServiceCaseContract
 {
@@ -13,11 +16,20 @@ final readonly class UpdateCommandByClientIdServiceCase implements UpdateCommand
     {
     }
 
-    public function update(UpdateCommandByClientIdRequestDTO $updateCommandByClientIdRequestDTO): void
-    {
-        $this->commandRepository->updateByClientId(
-            $updateCommandByClientIdRequestDTO->getClientId(),
-            Command::fromArray($updateCommandByClientIdRequestDTO->toArray())
+    public function update(
+        ClientIdValueObject $clientIdValueObject,
+        CommandValueObject $commandValueObject
+    ): StatusValueObject {
+        return new StatusValueObject(
+            $this->commandRepository->updateByClientId(
+                $clientIdValueObject->getClientId(),
+                Command::fromArray([
+                        'clientId' => $commandValueObject->getClientId(),
+                        'command' => $commandValueObject->getCommand(),
+                        'response' => $commandValueObject->getResponse(),
+                    ]
+                )
+            )
         );
     }
 }

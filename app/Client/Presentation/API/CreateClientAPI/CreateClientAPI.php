@@ -8,6 +8,7 @@ use App\Client\Application\RequestDTOFactory\CreateClientRequestDTOFactory\Creat
 use App\Client\Application\RequestDTOValidation\RequestDTOValidationException;
 use App\Client\Application\Service\CreateClientService\CreateClientServiceContract;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 final readonly class CreateClientAPI
 {
@@ -17,16 +18,18 @@ final readonly class CreateClientAPI
     ) {
     }
 
-    public function create(?string $name, ?string $ip): JsonResponse
+    public function create(array $data): JsonResponse
     {
         try {
             return response()->json()->setJson(
                 $this->createClientService->create(
-                    $this->createClientRequestDTOFactory->create($name, $ip)
+                    $this->createClientRequestDTOFactory->create($data)
                 )->toJson()
             );
         } catch (RequestDTOValidationException $exception) {
-            return response()->json()->setJson($exception->getMessage());
+            return response()->json()->setJson(
+                $exception->getMessage()
+            )->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
 }

@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Command\Presentation\API\UpdateCommandByClientIdAPI;
 
 use App\Command\Application\RequestDTOFactory\UpdateCommandByClientIdRequestDTOFactory\UpdateCommandByClientIdRequestDTOFactoryContract;
+use App\Command\Application\RequestDTOValidation\RequestDTOValidationException;
 use App\Command\Application\Service\UpdateCommandByClientIdService\UpdateCommandByClientIdServiceContract;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
-final readonly class UpdateCommandByClientIdAPI implements UpdateCommandByClientIdAPIContract
+final readonly class UpdateCommandByClientIdAPI
 {
     public function __construct(
         private UpdateCommandByClientIdServiceContract $updateCommandByClientIdService,
@@ -16,14 +18,18 @@ final readonly class UpdateCommandByClientIdAPI implements UpdateCommandByClient
     ) {
     }
 
-    public function update(int $clientId, ?string $command, ?string $response): void
+    public function update(array $data): JsonResponse
     {
         try {
-            $this->updateCommandByClientIdService->update(
-                $this->updateCommandByClientIdRequestDTOFactory->create($clientId, $command, $response)
+            return response()->json()->setJson(
+                $this->updateCommandByClientIdService->update(
+                    $this->updateCommandByClientIdRequestDTOFactory->create($data)
+                )->toJson()
             );
-        } catch (\Exception $exception) {
-            throw new HttpResponseException(response()->json()->setJson($exception->getMessage()));
+        } catch (RequestDTOValidationException $exception) {
+            return response()->json()->setJson(
+                $exception->getMessage()
+            )->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
 }

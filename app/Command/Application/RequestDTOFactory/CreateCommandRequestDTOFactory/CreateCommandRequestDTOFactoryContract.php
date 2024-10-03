@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Application\RequestDTOFactory\CreateCommandRequestDTOFactory;
@@ -9,9 +10,9 @@ use App\Command\Application\RequestDTOValidation\CreateCommandRequestDTOValidati
 interface CreateCommandRequestDTOFactoryContract
 {
     /**
-     * @param int $clientId
+     * @param array $data
      * @return CreateCommandRequestDTO
      * @throws CreateCommandRequestDTOValidationException
      */
-    public function create(int $clientId): CreateCommandRequestDTO;
+    public function create(array $data): CreateCommandRequestDTO;
 }

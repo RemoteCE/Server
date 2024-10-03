@@ -37,4 +37,9 @@ final readonly class CreateClientRequestDTO implements RequestDTOContract
         return json_encode($this->toArray());
     }
 
+    public static function fromArray(array $data): self
+    {
+        return new self($data['name'] ?? null, $data['ip'] ?? null);
+    }
+
 }

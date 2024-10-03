@@ -68,8 +68,8 @@ class CreateMappersCommand extends Command
         if (!File::exists($path)) {
             if (!File::exists(dirname($path))) {
                 File::makeDirectory(dirname($path), 0755, true);
-                File::put($path, $content);
             }
+            File::put($path, $content);
         }
         return;
     }

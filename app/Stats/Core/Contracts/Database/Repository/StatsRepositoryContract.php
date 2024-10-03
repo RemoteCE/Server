@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Stats\Core\Contracts\Database\Repository;
@@ -9,13 +10,13 @@ interface StatsRepositoryContract
 {
     /**
      * @param Stats $stats
-     * @return void
+     * @return bool
      */
-    public function create(Stats $stats): void;
+    public function create(Stats $stats): bool;
 
     /**
      * @param int $clientId
-     * @return void
+     * @return bool
      */
-    public function deleteByClientId(int $clientId): void;
+    public function deleteByClientId(int $clientId): bool;
 }

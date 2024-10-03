@@ -1,17 +1,18 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Stats\Application\RequestDTOFactory\CreateStatsRequestDTOFactory;
 
 use App\Stats\Application\RequestDTO\CreateStatsRequestDTO;
-use App\Stats\Application\RequestDTOValidation\CreateStatsRequestDTOValidation\CreateStatsRequestDTOValidationException;
+use App\Stats\Application\RequestDTOValidation\CreateStatsRequestDTOValidation\CreateStatsRequestRequestDTOValidationException;
 
 interface CreateStatsRequestDTOFactoryContract
 {
     /**
-     * @param int $clientId
+     * @param array $data
      * @return CreateStatsRequestDTO
-     * @throws CreateStatsRequestDTOValidationException
+     * @throws CreateStatsRequestRequestDTOValidationException
      */
-    public function create(int $clientId): CreateStatsRequestDTO;
+    public function create(array $data): CreateStatsRequestDTO;
 }

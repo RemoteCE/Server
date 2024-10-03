@@ -8,8 +8,9 @@ use App\Command\Application\RequestDTOFactory\CreateCommandRequestDTOFactory\Cre
 use App\Command\Application\RequestDTOValidation\RequestDTOValidationException;
 use App\Command\Application\Service\CreateCommandService\CreateCommandServiceContract;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
-final readonly class CreateCommandAPI implements CreateCommandAPIContract
+final readonly class CreateCommandAPI
 {
     public function __construct(
         private CreateCommandServiceContract $createCommandService,
@@ -17,16 +18,18 @@ final readonly class CreateCommandAPI implements CreateCommandAPIContract
     ) {
     }
 
-    public function create(int $clientId): JsonResponse
+    public function create(array $data): JsonResponse
     {
         try {
             return response()->json()->setJson(
                 $this->createCommandService->create(
-                    $this->createCommandRequestDTOFactory->create($clientId)
+                    $this->createCommandRequestDTOFactory->create($data)
                 )->toJson()
             );
         } catch (RequestDTOValidationException $exception) {
-            return response()->json()->setJson($exception->getMessage());
+            return response()->json()->setJson(
+                $exception->getMessage()
+            )->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
 }

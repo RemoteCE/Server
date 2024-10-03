@@ -6,5 +6,4 @@ namespace App\Command\Core\Domain\Entity;
 
 interface ValueObjectContract
 {
-
 }

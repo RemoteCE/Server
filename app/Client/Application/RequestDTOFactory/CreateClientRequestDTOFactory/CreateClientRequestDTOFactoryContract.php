@@ -10,10 +10,9 @@ use App\Client\Application\RequestDTOValidation\CreateClientRequestDTOValidation
 interface CreateClientRequestDTOFactoryContract
 {
     /**
-     * @param ?string $name
-     * @param ?string $ip
+     * @param array $data
      * @return CreateClientRequestDTO
      * @throws CreateClientRequestDTOValidationException
      */
-    public function create(?string $name, ?string $ip): CreateClientRequestDTO;
+    public function create(array $data): CreateClientRequestDTO;
 }

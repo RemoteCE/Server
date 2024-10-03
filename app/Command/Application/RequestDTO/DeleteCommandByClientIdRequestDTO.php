@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Application\RequestDTO;
@@ -25,5 +26,10 @@ final readonly class DeleteCommandByClientIdRequestDTO implements RequestDTOCont
     public function toJson(): string
     {
         return json_encode($this->toArray());
+    }
+
+    public static function fromArray(array $data): self
+    {
+        return new self($data['clientId']);
     }
 }

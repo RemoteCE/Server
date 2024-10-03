@@ -1,22 +1,28 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Client\Infrastructure\External\StatsExternal\DeleteStatsByClientId;
 
-use App\Client\Core\Domain\Entity\Client\Client;
 use App\Client\Infrastructure\External\StatsExternal\StatsExternalException;
-use App\Stats\Application\Service\CreateStatsService\CreateStatsServiceContract;
-use App\Stats\Application\Service\DeleteStatsByClientIdService\DeleteStatsByClientIdServiceContract;
+use App\Stats\Presentation\API\DeleteStatsByClientIdAPI\DeleteStatsByClientIdAPI;
 
 class DeleteStatsByClientId
 {
-    public function __construct(private DeleteStatsByClientIdServiceContract $deleteStatsByClientIdAPI)
+    public function __construct(private DeleteStatsByClientIdAPI $deleteStatsByClientIdAPI)
     {
     }
 
-
+    /**
+     * @param int $clientId
+     * @return void
+     * @throws StatsExternalException
+     */
     public function delete(int $clientId): void
     {
-        $this->deleteStatsByClientIdAPI->delete($clientId);
+        $response = $this->deleteStatsByClientIdAPI->delete(['clientId' => $clientId]);
+        if (!($response->getData(true)['status'])) {
+            throw new StatsExternalException($response->getContent());
+        }
     }
 }
