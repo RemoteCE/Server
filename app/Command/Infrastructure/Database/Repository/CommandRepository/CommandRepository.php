@@ -29,9 +29,9 @@ final readonly class CommandRepository implements CommandRepositoryContract
         return $this->deleteCommandByClientId->delete($clientId);
     }
 
-    public function updateByClientId(int $clientId, Command $command): void
+    public function updateByClientId(int $clientId, Command $command): bool
     {
-        $this->updateCommandByclientId->update($clientId, $command);
+        return $this->updateCommandByclientId->update($clientId, $command);
     }
 
 

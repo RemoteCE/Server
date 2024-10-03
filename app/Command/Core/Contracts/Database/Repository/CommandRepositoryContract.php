@@ -23,7 +23,7 @@ interface CommandRepositoryContract
     /**
      * @param int $clientId
      * @param Command $command
-     * @return void
+     * @return bool
      */
-    public function updateByClientId(int $clientId, Command $command): void;
+    public function updateByClientId(int $clientId, Command $command): bool;
 }

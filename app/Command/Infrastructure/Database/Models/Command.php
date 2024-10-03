@@ -14,4 +14,13 @@ class Command extends Model
         'command',
         'response'
     ];
+
+    public function updateWithoutNulls(array $attributes): bool
+    {
+        return $this->update(
+            array_filter($attributes, function ($value) {
+                return !is_null($value);
+            })
+        );
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Infrastructure\Database\Repository\CommandRepository\UpdateCommandByClientId;
@@ -12,9 +13,10 @@ final readonly class UpdateCommandByClientId
     {
     }
 
-    public function update(int $clientId, Command $command): void
+    public function update(int $clientId, Command $command): bool
     {
-        $this->model->where('client_id', $clientId)->update([
+        return $this->model->where('client_id', $clientId)->updateWithoutNulls([
+            'client_id' => $command->getClientId(),
             'command' => $command->getCommand(),
             'response' => $command->getResponse(),
         ]);

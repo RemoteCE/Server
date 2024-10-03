@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Application\RequestDTOValidation\UpdateCommandByClientIdRequestDTOValidation;
@@ -13,8 +14,9 @@ class UpdateCommandByClientIdRequestDTOValidation implements UpdateCommandByClie
     {
         $validation = Validator::make($updateCommandByClientIdRequestDTO->toArray(), [
             'clientId' => ['required', 'integer', 'exists:clients,id'],
-            'command' => ['string', 'nullable'],
-            'response' => ['string', 'nullable'],
+            'newClientId' => ['required', 'integer', 'nullable', 'exists:clients,id'],
+            'command' => ['required', 'string', 'nullable'],
+            'response' => ['required', 'string', 'nullable'],
         ]);
 
         if ($validation->fails()) {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Application\RequestDTO;
@@ -6,19 +7,25 @@ namespace App\Command\Application\RequestDTO;
 final readonly class UpdateCommandByClientIdRequestDTO implements RequestDTOContract
 {
     public function __construct(
-        private int $clientId,
+        private string $clientId,
+        private ?string $newClientId,
         private ?string $command,
         private ?string $response
-    )
-    {
+    ) {
     }
 
-    public function getClientId(): int
+    public function getClientId(): string
     {
         return $this->clientId;
     }
 
-    public function getCommand(): string
+    public function getNewClientId(): ?string
+    {
+        return $this->newClientId;
+    }
+
+
+    public function getCommand(): ?string
     {
         return $this->command;
     }
@@ -31,6 +38,7 @@ final readonly class UpdateCommandByClientIdRequestDTO implements RequestDTOCont
     public function toArray(): array
     {
         return [
+            'newClientId' => $this->newClientId,
             'clientId' => $this->clientId,
             'command' => $this->command,
             'response' => $this->response,

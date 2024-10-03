@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Application\RequestDTOFactory\UpdateCommandByClientIdRequestDTOFactory;
@@ -9,11 +10,17 @@ use App\Command\Application\RequestDTOValidation\UpdateCommandByClientIdRequestD
 interface UpdateCommandByClientIdRequestDTOFactoryContract
 {
     /**
-     * @param int $clientId
+     * @param string $clientId
+     * @param ?string $newClientId
      * @param ?string $command
      * @param ?string $response
      * @return UpdateCommandByClientIdRequestDTO
      * @throws UpdateCommandByClientIdRequestDTOValidationException
      */
-    public function create(int $clientId, ?string $command, ?string $response): UpdateCommandByClientIdRequestDTO;
+    public function create(
+        string $clientId,
+        ?string $newClientId,
+        ?string $command,
+        ?string $response
+    ): UpdateCommandByClientIdRequestDTO;
 }

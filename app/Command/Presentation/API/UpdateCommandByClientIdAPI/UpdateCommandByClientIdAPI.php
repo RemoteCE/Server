@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Command\Presentation\API\UpdateCommandByClientIdAPI;
 
 use App\Command\Application\RequestDTOFactory\UpdateCommandByClientIdRequestDTOFactory\UpdateCommandByClientIdRequestDTOFactoryContract;
+use App\Command\Application\RequestDTOValidation\RequestDTOValidationException;
 use App\Command\Application\Service\UpdateCommandByClientIdService\UpdateCommandByClientIdServiceContract;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 
 final readonly class UpdateCommandByClientIdAPI implements UpdateCommandByClientIdAPIContract
 {
@@ -16,14 +17,21 @@ final readonly class UpdateCommandByClientIdAPI implements UpdateCommandByClient
     ) {
     }
 
-    public function update(int $clientId, ?string $command, ?string $response): void
+    public function update(string $clientId, ?string $newClientId, ?string $command, ?string $response): JsonResponse
     {
         try {
-            $this->updateCommandByClientIdService->update(
-                $this->updateCommandByClientIdRequestDTOFactory->create($clientId, $command, $response)
+            return response()->json()->setJson(
+                $this->updateCommandByClientIdService->update(
+                    $this->updateCommandByClientIdRequestDTOFactory->create(
+                        $clientId,
+                        $newClientId,
+                        $command,
+                        $response
+                    )
+                )->toJson()
             );
-        } catch (\Exception $exception) {
-            throw new HttpResponseException(response()->json()->setJson($exception->getMessage()));
+        } catch (RequestDTOValidationException $exception) {
+            return response()->json()->setJson($exception->getMessage());
         }
     }
 }
