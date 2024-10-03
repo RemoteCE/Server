@@ -8,5 +8,5 @@ use Illuminate\Http\JsonResponse;
 
 interface DeleteCommandByClientIdAPIContract
 {
-    public function delete(int $clientId): JsonResponse;
+    public function delete(string $clientId): JsonResponse;
 }

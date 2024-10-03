@@ -8,5 +8,5 @@ use Illuminate\Http\JsonResponse;
 
 interface CreateCommandAPIContract
 {
-    public function create(int $clientId): JsonResponse;
+    public function create(string $clientId): JsonResponse;
 }

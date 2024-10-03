@@ -17,7 +17,7 @@ final readonly class CreateCommandAPI implements CreateCommandAPIContract
     ) {
     }
 
-    public function create(int $clientId): JsonResponse
+    public function create(string $clientId): JsonResponse
     {
         try {
             return response()->json()->setJson(

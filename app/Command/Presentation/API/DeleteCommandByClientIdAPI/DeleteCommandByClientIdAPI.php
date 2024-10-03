@@ -17,7 +17,7 @@ final readonly class DeleteCommandByClientIdAPI implements DeleteCommandByClient
     ) {
     }
 
-    public function delete(int $clientId): JsonResponse
+    public function delete(string $clientId): JsonResponse
     {
         try {
             return response()->json()->setJson(

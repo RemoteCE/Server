@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command\Application\RequestDTO;
@@ -6,11 +7,11 @@ namespace App\Command\Application\RequestDTO;
 final readonly class DeleteCommandByClientIdRequestDTO implements RequestDTOContract
 {
 
-    public function __construct(private int $clientId)
+    public function __construct(private string $clientId)
     {
     }
 
-    public function getClientId(): int
+    public function getClientId(): string
     {
         return $this->clientId;
     }
