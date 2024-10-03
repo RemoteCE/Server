@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Stats\Application\RequestDTO;
+namespace App\Stats\Application\ResponseDTO;
 
-interface RequestDTOContract
+interface ResponseDTOContract
 {
     public function toArray(): array;
 

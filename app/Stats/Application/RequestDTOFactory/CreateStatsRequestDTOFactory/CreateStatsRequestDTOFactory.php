@@ -1,10 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Stats\Application\RequestDTOFactory\CreateStatsRequestDTOFactory;
 
 use App\Stats\Application\RequestDTO\CreateStatsRequestDTO;
-use App\Stats\Application\RequestDTOValidation\CreateStatsRequestDTOValidation\CreateStatsRequestDTOValidation;
 use App\Stats\Application\RequestDTOValidation\CreateStatsRequestDTOValidation\CreateStatsRequestDTOValidationContract;
 
 final readonly class CreateStatsRequestDTOFactory implements CreateStatsRequestDTOFactoryContract
@@ -12,11 +12,10 @@ final readonly class CreateStatsRequestDTOFactory implements CreateStatsRequestD
     public function __construct(private CreateStatsRequestDTOValidationContract $createStatsRequestDTOValidation)
     {
     }
-    
-    public function create(int $clientId): CreateStatsRequestDTO
+
+    public function create(array $data): CreateStatsRequestDTO
     {
-        $CreateStatsRequestDTO = new CreateStatsRequestDTO($clientId);
-        $this->createStatsRequestDTOValidation->validate($CreateStatsRequestDTO);
-        return $CreateStatsRequestDTO;
+        $this->createStatsRequestDTOValidation->validate($data);
+        return CreateStatsRequestDTO::fromArray($data);
     }
 }

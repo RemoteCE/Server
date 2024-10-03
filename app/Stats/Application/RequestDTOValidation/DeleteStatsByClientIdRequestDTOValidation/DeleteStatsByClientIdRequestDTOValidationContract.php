@@ -10,7 +10,7 @@ interface DeleteStatsByClientIdRequestDTOValidationContract
     /**
      * @param DeleteStatsByClientIdRequestDTO $deleteStatsByClientIdDTO
      * @return void
-     * @throws DeleteStatsByClientIdRequestDTOValidationException
+     * @throws DeleteStatsByClientIdRequestRequestDTOValidationException
      */
     public function validate(DeleteStatsByClientIdRequestDTO $deleteStatsByClientIdDTO): void;
 }

@@ -1,16 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Stats\Application\Service\CreateStatsService;
 
-use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Stats\Application\RequestDTO\CreateStatsRequestDTO;
+use App\Stats\Application\ResponseDTO\CreateStatsResponseDTO;
 
 interface CreateStatsServiceContract
 {
     /**
-     * @param int $clientId
-     * @return void
-     * @throws HttpResponseException;
+     * @param CreateStatsRequestDTO $createStatsRequestDTO
+     * @return CreateStatsResponseDTO
      */
-    public function create(int $clientId): void;
+    public function create(CreateStatsRequestDTO $createStatsRequestDTO): CreateStatsResponseDTO;
 }

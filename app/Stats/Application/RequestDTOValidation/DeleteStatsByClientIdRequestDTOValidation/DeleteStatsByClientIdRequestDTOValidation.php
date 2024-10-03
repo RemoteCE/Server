@@ -17,7 +17,7 @@ class DeleteStatsByClientIdRequestDTOValidation implements DeleteStatsByClientId
         ]);
 
         if($validation->fails()) {
-            throw new DeleteStatsByClientIdRequestDTOValidationException($validation->messages()->toJson());
+            throw new DeleteStatsByClientIdRequestRequestDTOValidationException($validation->messages()->toJson());
         }
     }
 }
